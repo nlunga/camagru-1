@@ -94,7 +94,6 @@ class Validate {
 			$this->_passed = true;
 		}
 		else {
-			//echo "hjere";
 			$this->_passed = false;
 		}
 	}
@@ -109,7 +108,6 @@ class Validate {
 
 	public function displayErrors() {
 		$html = '<ul class="bg-danger">';
-		//var_dump($this->_errors);
 		foreach ($this->_errors as $error) {
 			
 			if(is_array($error)) {
