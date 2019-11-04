@@ -21,22 +21,21 @@ class RegisterController extends Controller {
 				],
 				'password' => [
 					'display' => 'Password',
-					'required' => true,
+					'required' => true
 				]
 			]);
 			if($validation->passed()) {
 				$user = $this->UsersModel->findByUsername($_POST['username']);
+				//dnd($user);
 				if ($user && password_verify(Input::get('password'), $user->password)) {
 					$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 					$user->login($remember);
 					Router::redirect('');
 				}
 				else {
-					$validation->addError("There is an error with your username or password.");
+					$validation->addError(["There is an error with your username or password.", ""]);
 				}
 			}
-			
-			//dnd($user);
 		}
 
 		$this->view->displayErrors = $validation->displayErrors();

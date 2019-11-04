@@ -112,17 +112,21 @@ class DB {
 		$values = [];
 
 		foreach($fields as $field => $value) {
-			$fieldString .= '`' . $field . '`,';
-			$valueString .= '?,';
-			$values[] = $value;
+			if($field != 'creation_date') {
+				$fieldString .= '`' . $field . '`,';
+				$valueString .= '?,';
+				$values[] = $value;
+			}
 		}
 		$fieldString = rtrim($fieldString, ',');
 		$valueString = rtrim($valueString, ',');
 
 		$sql = "INSERT INTO {$table} ({$fieldString}) VALUES ({$valueString})";
 		if(!$this->query($sql, $values)->error()) {
+			
 			return true;
 		}
+		
 		return false;
 	}
 
