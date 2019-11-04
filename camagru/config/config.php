@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost'); // database host, *use IP address to avoid DNS l
 define('DEFAULT_CONTROLLER', 'Home'); //default controller if there isnt one defined
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set in controller use this one default
 
-define('PROOT', '/camagru/camagru/'); // set this to '/' for a live server
+define('PROOT', '/mvc-prac/camagru/'); // set tthis to '/' for a live server
 
 define('SITE_TITLE', 'Modo MVC framework'); //this will be used if no sitetitle is set
 define('MENU_BRAND', 'Camagru'); // Brand text in the menu
@@ -20,4 +20,3 @@ define('REMEMBER_ME_COOKIE_NAME', 'HJMIYSEDJhjnhnSIFJSfsdfFJJFE'); //cookie name
 define('REMEMBER_ME_COOKIE_EXPIRY', 2592000); // time in seconds for remember me cookie to live (30 days)
 
 define('ACCESS_RESTRICTED', 'Restricted'); //controller name for the restricted redirect
-
