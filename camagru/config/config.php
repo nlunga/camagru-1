@@ -10,7 +10,7 @@ define('DB_HOST', 'localhost'); // database host, *use IP address to avoid DNS l
 define('DEFAULT_CONTROLLER', 'Home'); //default controller if there isnt one defined
 define('DEFAULT_LAYOUT', 'default'); //if no layout is set in controller use this one default
 
-define('PROOT', '/mvc-prac/camagru/'); // set tthis to '/' for a live server
+define('PROOT', '/camagru/camagru/'); // set tthis to '/' for a live server
 
 define('SITE_TITLE', 'Modo MVC framework'); //this will be used if no sitetitle is set
 define('MENU_BRAND', 'Camagru'); // Brand text in the menu
