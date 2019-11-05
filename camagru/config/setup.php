@@ -38,6 +38,16 @@
             user_agent VARCHAR(255) NOT NULL
             );";
         $conn->exec($statement);
+
+        $statement = "CREATE TABLE feed(
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            likes INT,
+            comments TEXT,
+            img ,
+            creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );";
+        $conn->exec($statement);
     }
     catch(PDOException $e){
         echo $statement."<br>".$e->getMessage();

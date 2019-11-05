@@ -40,4 +40,8 @@ class HomeController extends Controller {
 
 		
 	}
+
+	public function discoverAction() {
+		$this->view->render('home/discover');
+	}
 }

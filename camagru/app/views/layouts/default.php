@@ -19,7 +19,7 @@
    
 	</head>
 	
-	<body>
+	<body >
 
 		<?php include 'main_menu.php' ?>
 
@@ -30,10 +30,10 @@
 
 	</body>
 
-	<!-- <footer> -->
+	<footer class="footer mt-auto py-3">
 	
 		<?php include 'footer.php' ?>
 
-	<!-- </footer> -->
+	</footer>
 
 </html>

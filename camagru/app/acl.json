@@ -12,7 +12,7 @@
 		},
 		"Register": ["logout"],
 		"Tools": ["*"],
-		"Settings": ["*"]
+		"Profile": ["*"]
 	},
 
 	"Admin": {

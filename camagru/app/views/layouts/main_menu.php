@@ -5,18 +5,18 @@
 ?>
 
 <nav  class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_menu" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="<?=PROOT?>home"><?=MENU_BRAND?></a>
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_menu" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<?=PROOT?>home"><?=MENU_BRAND?></a>
     </div>
-
+  
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main_menu">
       <ul class="nav navbar-nav">
@@ -58,7 +58,12 @@
       <ul class="nav navbar-nav navbar-right">
         
 		<?php if(currentUser()) :?>
-			<li><a href="#">Hello <?=currentUser()->fname?> </a></li>
+      <li><a href="<?=PROOT?>profile"><?=ucwords(currentUser()->fname)?> </a></li>
+      <li><a href="<?=PROOT?>profile/settings">Settings</a></li>
+      <li><a href="<?=PROOT?>register/logout">Logout</a></li>
+    <?php else: ?>
+      <li><a href="<?=PROOT?>register/login">Login</a></li>
+      <li><a href="<?=PROOT?>register/register">Register</a></li>
 		<?php endif; ?>
 
       </ul>
