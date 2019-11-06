@@ -93,7 +93,9 @@ class RegisterController extends Controller {
 
 			if($validation->passed()) {
 				$newUser = new Users();
-				$newUser->registerNewUser($_POST);
+				$token = bin2hex(random_bytes(20));
+				$newUser->registerNewUser($_POST, $token);
+				$this->verifyUser($_POST['email'], $token);
 				Router::redirect('register/login');
 			}
 		}
@@ -103,4 +105,18 @@ class RegisterController extends Controller {
 		$this->view->render('register/register');
 	}
 
+	public function verifyAction(){
+		$this->view->render('register/verify');
+	}
+
+	public function verifyUser($email, $token) {
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		$to = $email;
+		$subject = 'Camagru Validation Request';
+		$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+		mail($to, $subject, $message, $headers);
+	}
+
 }
+

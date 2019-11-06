@@ -6,9 +6,6 @@ class ProfileController extends Controller {
 	}
 
 	public function indexAction() {
-		// $db = DB::getInstance();
-		//dnd($_SESSION);
-		
 		$this->view->render('profile/index');
 	}
 
@@ -19,5 +16,6 @@ class ProfileController extends Controller {
 	public function uploadAction() {
 		$this->view->render('profile/upload');
 	}
+
 }
 ?>

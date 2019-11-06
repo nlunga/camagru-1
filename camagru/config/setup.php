@@ -1,5 +1,6 @@
 <?php
     include_once 'database.php';
+    include_once 'config.php';
     try{
         $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -7,7 +8,7 @@
         $conn->exec($statement);
         $statement = "CREATE DATABASE $DB_NAME";
         $conn->exec($statement);
-        echo "done";
+        echo 'done';
     }
     catch(PDOException $e){
         echo $statement . "<br>" . $e->getMessage();
@@ -24,11 +25,14 @@
             lname VARCHAR(100) NOT NULL,
             acl TEXT,
             deleted TINYINT(4) DEFAULT 0,
-            creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            token VARCHAR(150),
+            is_verified TINYINT DEFAULT 0
             );";
         $conn->exec($statement);
+        $hash = password_hash('admin', PASSWORD_DEFAULT);
         $statement = 'INSERT INTO users(username, email, `password`, fname, lname)
-        VALUES("admin", "vesingh@student.wethinkcode.co.za", "$2y$10$5XxvFxngf2RzlyugwqansOK7G3mXXYd18v5kQYzbepwBaFxdC4XMK", "admin", "admin")';
+        VALUES("admin", "vesingh@student.wethinkcode.co.za", "'.$hash.'", "admin", "admin")';
         $conn->exec($statement);
         $statement = "CREATE TABLE user_sessions(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -39,13 +43,27 @@
             );";
         $conn->exec($statement);
 
-        $statement = "CREATE TABLE feed(
+        $statement = "CREATE TABLE posts(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
-            likes INT,
-            comments TEXT,
-            img ,
+            img TEXT,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );";
+        $conn->exec($statement);
+
+        $statement = "CREATE TABLE comments(
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            post_id INT NOT NULL,
+            user_id INT NOT NULL,
+            comment TEXT NOT NULL,
+            creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );";
+        $conn->exec($statement);
+
+        $statement = "CREATE TABLE likes(
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            post_id INT NOT NULL,
+            user_id INT NOT NULL
             );";
         $conn->exec($statement);
     }
@@ -53,4 +71,11 @@
         echo $statement."<br>".$e->getMessage();
     } 
     $conn = NULL;
+
+    // echo '<script type="text/javascript">';
+	// 		echo 'window.location.href="'.PROOT.'home";';
+	// 		echo '</script>';
+	// 		echo '<noscript>';
+	// 		echo '<meta http-quiv="refresh" content="0;url=home" />';
+	// 		echo '</noscript>';
 ?>

@@ -24,3 +24,7 @@ html::-webkit-scrollbar-thumb:hover {
 .row {
 	margin: 0 auto;
 }
+
+.giphy-embed {
+	pointer-events: none;
+}
