@@ -95,7 +95,8 @@ class RegisterController extends Controller {
 				$newUser = new Users();
 				$token = bin2hex(random_bytes(20));
 				$newUser->registerNewUser($_POST, $token);
-				$this->verifyUser($_POST['email'], $token);
+				$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+				$this->UsersModel->sendMail($_POST['email'],"Camagru Validation Request", $message);
 				Router::redirect('register/login');
 			}
 		}
@@ -103,28 +104,6 @@ class RegisterController extends Controller {
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/register');
-	}
-
-	public function verifyUser($email, $token) {
-		$headers = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		$to = $email;
-		$subject = 'Camagru Validation Request';
-		$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
-		// $message = "
-		// 		<html>
-		// 			<head>
-		// 				<title>'.$subject.'</title>
-		// 			</head>
-		// 			<body>
-		// 				Thanks for registering to Camagru
-		// 				To finalize the registration process please click the link below <br>
-		// 				<a href=http://localhost:8080/camagru/camagru/register/verify?token=$token>Verify my email</a>
-		// 				If this was not you, please ignore this email and the address will not be used.
-		// 			</body>
-		// 		</html>
-		// 		";
-		mail($to, $subject, $message, $headers);
 	}
 
 	public function verifyAction(){
@@ -142,5 +121,53 @@ class RegisterController extends Controller {
 		}
 	}
 
-}
+	public function forgotAction(){
+		$validation = new Validate();
+		$posted_values = ['email' => ''];
 
+		if($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+			'email' => [
+				'display' => 'Email',
+				'required' => true,
+				'unique' => 'users',
+				'max' => 150,
+				'valid_email' => true
+			]
+		]);
+		}
+
+		if($validation->passed()) {
+			$result = $this->UsersModel->findFirst(['conditions' => 'email = ?', 'bind' => [$posted_values['email']]]);
+			if($result->email) {
+				if ($result->token == '' && $result->verified == 1) {
+					$token = bin2hex(random_bytes(20));
+					$this->UsersModel->update($result->id, ['token' => $token]);
+					$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+					$this->UsersModel->sendMail($_POST['email'], "Camagru Password Reset Request", $message);
+				}
+				else {
+					$validation->addError("Please verify your account before changing passwords");
+				}
+			}
+			else {
+				$validation->addError("Email not found. Please register");
+			}
+		}
+
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('register/forgot');
+	}
+
+	public function changepassAction() {
+		$validation = new Validate();
+		$posted_values = ['email' => '', 'password' => '', 'confirm' => ''];
+		$posted_values = posted_values($_POST);
+
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('register/changepass');
+	}
+
+}

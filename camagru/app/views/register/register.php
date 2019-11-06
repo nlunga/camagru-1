@@ -1,3 +1,5 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Register'); ?>
+
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>
 
