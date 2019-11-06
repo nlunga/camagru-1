@@ -105,17 +105,41 @@ class RegisterController extends Controller {
 		$this->view->render('register/register');
 	}
 
-	public function verifyAction(){
-		$this->view->render('register/verify');
-	}
-
 	public function verifyUser($email, $token) {
 		$headers = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$to = $email;
 		$subject = 'Camagru Validation Request';
 		$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+		// $message = "
+		// 		<html>
+		// 			<head>
+		// 				<title>'.$subject.'</title>
+		// 			</head>
+		// 			<body>
+		// 				Thanks for registering to Camagru
+		// 				To finalize the registration process please click the link below <br>
+		// 				<a href=http://localhost:8080/camagru/camagru/register/verify?token=$token>Verify my email</a>
+		// 				If this was not you, please ignore this email and the address will not be used.
+		// 			</body>
+		// 		</html>
+		// 		";
 		mail($to, $subject, $message, $headers);
+	}
+
+	public function verifyAction(){
+		$token = $_GET['token'];
+		$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
+		if($result->email){
+			if ($result->token){
+				$this->UsersModel->update($result->id, ['verified' => 1]);
+				$this->UsersModel->update($result->id, ['token' => '']);
+				$this->view->render('register/verify');
+			}
+		}
+		else{
+			$this->view->render('restricted');
+		}
 	}
 
 }

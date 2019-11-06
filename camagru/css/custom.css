@@ -25,6 +25,6 @@ html::-webkit-scrollbar-thumb:hover {
 	margin: 0 auto;
 }
 
-.giphy-embed {
-	pointer-events: none;
+.img-responsive {
+	margin: 0 auto;
 }
