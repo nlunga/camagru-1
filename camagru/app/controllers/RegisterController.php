@@ -131,7 +131,6 @@ class RegisterController extends Controller {
 			'email' => [
 				'display' => 'Email',
 				'required' => true,
-				'unique' => 'users',
 				'max' => 150,
 				'valid_email' => true
 			]
@@ -144,8 +143,9 @@ class RegisterController extends Controller {
 				if ($result->token == '' && $result->verified == 1) {
 					$token = bin2hex(random_bytes(20));
 					$this->UsersModel->update($result->id, ['token' => $token]);
-					$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+					$message = "<a href='http://localhost:8080/camagru/camagru/register/changepass?token=$token'>Click here to reset your pasword.</a>";
 					$this->UsersModel->sendMail($_POST['email'], "Camagru Password Reset Request", $message);
+					Router::redirect('register/login');
 				}
 				else {
 					$validation->addError("Please verify your account before changing passwords");
@@ -159,38 +159,17 @@ class RegisterController extends Controller {
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/forgot');
+		
 	}
 
 	public function changepassAction() {
 
 		$validation = new Validate();
-		$posted_values = ['email' => '', 'password' => '', 'confirm' => ''];
+		$posted_values = ['password' => '', 'confirm' => ''];
 		
 		if($_POST) {
 			$posted_values = posted_values($_POST);
 			$validation->check($_POST, [
-				'fname' => [
-					'display' => 'First Name',
-					'required' => true
-				],
-				'lname' => [
-					'display' => 'Last Name',
-					'required' => true
-				],
-				'username' => [
-					'display' => 'Username',
-					'required' => true,
-					'unique' => 'users',
-					'min' => 6,
-					'max' => 150
-				],
-				'email' => [
-					'display' => 'Email',
-					'required' => true,
-					'unique' => 'users',
-					'max' => 150,
-					'valid_email' => true
-				],
 				'password' => [
 					'display' => 'Password',
 					'required' => true,
@@ -205,9 +184,28 @@ class RegisterController extends Controller {
 			]);
 		}
 
+		if($validation->passed()) {
+			$token = $_GET['token'];
+			$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
+			if ($result->email) {
+				if ($result->token == $token && $result->verified == 1) {
+					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$this->UsersModel->update($result->id, ['password' => $password]);
+					$this->UsersModel->update($result->id, ['token' => '']);
+					Router::redirect('register/login');
+				}
+				else{
+					$validation->addError("Please verify your account before changing passwords");
+				}
+			}
+			else {
+				$validation->addError("Email not found. Please register");
+			}
+		}
+		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/changepass');
+		
 	}
-
 
 }
