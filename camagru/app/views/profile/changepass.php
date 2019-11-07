@@ -7,7 +7,7 @@
 <div class="col-md-6 col-md-offset-3 well">
 	<form class="form" action="" method="post">
 	<div class="bg-danger"><?=$this->displayErrors ?></div>
-		<h3 class="text-center">Modify Password</h3>
+		<h3 class="text-center">Change Password</h3>
 		<div class="form-group" >
 			<label for="email">Old Password</label>
 			<input type="email" id="email" name="email" class="form-control" required="">

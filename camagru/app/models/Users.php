@@ -106,15 +106,15 @@ class Users extends Model {
 		mail($email, $subject, $message, $headers);
 	}
 
-	public function modUsername() {
+	public function changeUsername() {
 
 	}
 
-	public function modEmail() {
+	public function changeEmail() {
 
 	}
 
-	public function modPassword() {
+	public function changePassword() {
 		
 	}
 

@@ -17,7 +17,7 @@ class ProfileController extends Controller {
 		$this->view->render('profile/upload');
 	}
 
-	public function modpassAction() {
+	public function changepassAction() {
 		$validation = new Validate();
 		if($_POST) {
 			//form validation

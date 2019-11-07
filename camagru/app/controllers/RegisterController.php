@@ -27,10 +27,13 @@ class RegisterController extends Controller {
 			if($validation->passed()) {
 				$user = $this->UsersModel->findByUsername($_POST['username']);
 				//dnd($user);
-				if ($user && password_verify(Input::get('password'), $user->password)) {
+				if ($user && password_verify(Input::get('password'), $user->password) && $user->verified == 1) {
 					$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 					$user->login($remember);
 					Router::redirect('');
+				}
+				else if ($user && password_verify(Input::get('password'), $user->password) && $user->verified == 0) {
+					$validation->addError(["Please verify your account before you can log in.", ""]);
 				}
 				else {
 					$validation->addError(["There is an error with your username or password.", ""]);
