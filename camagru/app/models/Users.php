@@ -102,21 +102,21 @@ class Users extends Model {
 	public function sendMail($email, $subject, $message) {
 		$headers = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		//$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
-		// $message = "
-		// 		<html>
-		// 			<head>
-		// 				<title>'.$subject.'</title>
-		// 			</head>
-		// 			<body>
-		// 				Thanks for registering to Camagru
-		// 				To finalize the registration process please click the link below <br>
-		// 				<a href=http://localhost:8080/camagru/camagru/register/verify?token=$token>Verify my email</a>
-		// 				If this was not you, please ignore this email and the address will not be used.
-		// 			</body>
-		// 		</html>
-		// 		";
+
 		mail($email, $subject, $message, $headers);
 	}
+
+	public function modUsername() {
+
+	}
+
+	public function modEmail() {
+
+	}
+
+	public function modPassword() {
+		
+	}
+
 
 }
