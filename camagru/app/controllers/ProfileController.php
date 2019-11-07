@@ -22,15 +22,23 @@ class ProfileController extends Controller {
 		if($_POST) {
 			//form validation
 			$validation->check($_POST, [
-				'username' => [
-					'display' => "Username",
+				'oldpass' => [
+					'display' => "Old Password",
 					'required' => true
 				],
-				'password' => [
-					'display' => 'Password',
-					'required' => true
+				'newpass' => [
+					'display' => 'New Password',
+					'required' => true,
+					'min' => 6,
+					'lcase' => false
+				],
+				'confirm' => [
+					'display' => 'Confirm Password',
+					'required' => true,
+					'matches' => 'newpass'
 				]
 			]);
+			
 			if($validation->passed()) {
 				$user = $this->UsersModel->findByUsername($_POST['username']);
 				//dnd($user);
