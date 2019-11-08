@@ -11,7 +11,7 @@
 </div>
 
 <div class="col-md-4 col-md-offset-4 well">
-	<form action="<?=PROOT?>profile/moduser" method="post" class="form">
+	<form action="<?=PROOT?>profile/changeusername" method="post" class="form">
 		<div class="center" style="margin: 20px 0;">
 			<input type="submit" class="btn btn-primary btn-block" value="Change Username">
 		</div>

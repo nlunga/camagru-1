@@ -83,11 +83,41 @@ class ProfileController extends Controller {
 				$this->UsersModel->update($user->id, ['email' => $_POST['email']]);
 				Router::redirect('profile/settings');
 			}
+
 		}
 
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('profile/changemail');
+	}
+
+	public function changeusernameAction() {
+		$validation = new Validate();
+		$posted_values = ['username' => ''];
+
+		if($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+				'username' => [
+					'display' => 'Username',
+					'required' => true,
+					'unique' => 'users',
+					'min' => 6,
+					'max' => 150
+				]
+			]);
+
+			if($validation->passed()) {
+				$user = currentUser();
+				$this->UsersModel->update($user->id, ['username' => $_POST['username']]);
+				Router::redirect('profile/settings');
+			}
+
+		}
+
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('profile/changeusername');
 	}
 
 }
