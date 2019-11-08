@@ -11,6 +11,16 @@ class ProfileController extends Controller {
 	}
 
 	public function settingsAction() {
+		if($_POST && $user = currentUser()){
+			if ($_POST['mail'] == 'on'){
+				$this->UsersModel->update($user->id, ['notify' => 1]);
+			}
+			else if ($_POST['mail'] == 'off') {
+				$this->UsersModel->update($user->id, ['notify' => 0]);
+			}
+		}
+
+
 		$this->view->render('profile/settings');
 	}
 

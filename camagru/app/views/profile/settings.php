@@ -30,16 +30,16 @@
 	</form>
 	<hr>
 
-	<form action="#" method="get" class="form">	
+	<form action="#" method="post" class="form">	
 
 		<h4 class="text-center" style="margin: 20px 0;">Email notifications</h4>
 		
 		<div class="text-center" >
 			<div style="margin: 0 20px; display:inline;">
-				<input type="radio" class="" checked name="mail" id="mailOn" value="on"> On
+				<input type="radio" class="" name="mail" id="mail" value="on"> On
 			</div>
 			<div style="margin: 0 20px; display:inline;">
-				<input type="radio" class="" name="mail" id="mainOff" value="off"> Off
+				<input type="radio" class="" name="mail" id="mail" value="off"> Off
 			</div>
 		</div>
 		<div class="text-center" style="margin: 20px 0;">
