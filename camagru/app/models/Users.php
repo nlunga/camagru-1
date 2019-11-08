@@ -2,7 +2,7 @@
 
 class Users extends Model {
 
-	private $_isLoggedIn, $_sessionName, $_cookieName;
+	private $_isLoggedIn, $_sessionName, $_cookieName, $_email = 1;
 	public static $currentLoggedInUser = NULL;
 
 	public function __construct($user='') {
@@ -115,6 +115,10 @@ class Users extends Model {
 	}
 
 	public function changePassword() {
+		
+	}
+
+	public function emailNotif() {
 		
 	}
 

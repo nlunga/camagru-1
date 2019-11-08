@@ -28,6 +28,25 @@
 			<input type="submit" class="btn btn-primary btn-block" value="Change Password">
 		</div>
 	</form>
+	<hr>
+
+	<form action="#" method="get" class="form">	
+
+		<h4 class="text-center" style="margin: 20px 0;">Email notifications</h4>
+		
+		<div class="text-center" >
+			<div style="margin: 0 20px; display:inline;">
+				<input type="radio" class="" name="mail" id="mailOn" value="on"> On
+			</div>
+			<div style="margin: 0 20px; display:inline;">
+				<input type="radio" class="" name="mail" id="mainOff" value="off"> Off
+			</div>
+		</div>
+		<div class="text-center" style="margin: 20px 0;">
+			<input type="submit" class="btn btn-primary btn-large" value="Save">
+		</div>
+
+	</form>
 </div>
 
 <?php $this->end(); ?>

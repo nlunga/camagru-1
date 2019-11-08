@@ -1,7 +1,8 @@
 <?php $this->setSiteTitle('Access Restricted'); ?>
 <?php $this->start('body'); ?>
 <div class="page-header text-center">
-  <h1>404<br>
+  <h1>Oh noes<br>
+  <small>404</small>
   	</h1>
 </div>
 <div class="container text-center">
