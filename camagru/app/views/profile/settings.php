@@ -17,7 +17,7 @@
 		</div>
 	</form>
 
-	<form action="<?=PROOT?>profile/modemail" method="post" class="form">
+	<form action="<?=PROOT?>profile/changemail" method="post" class="form">
 		<div class="center" style="margin: 20px 0;">
 			<input type="submit" class="btn btn-primary btn-block" value="Change Email">
 		</div>
@@ -36,14 +36,14 @@
 		
 		<div class="text-center" >
 			<div style="margin: 0 20px; display:inline;">
-				<input type="radio" class="" name="mail" id="mailOn" value="on"> On
+				<input type="radio" class="" checked name="mail" id="mailOn" value="on"> On
 			</div>
 			<div style="margin: 0 20px; display:inline;">
 				<input type="radio" class="" name="mail" id="mainOff" value="off"> Off
 			</div>
 		</div>
 		<div class="text-center" style="margin: 20px 0;">
-			<input type="submit" class="btn btn-primary btn-large" value="Save">
+			<input type="submit" class="btn btn-primary btn-large" value="Update Email Preference">
 		</div>
 
 	</form>

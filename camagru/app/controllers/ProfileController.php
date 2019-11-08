@@ -63,7 +63,31 @@ class ProfileController extends Controller {
 	}
 
 	public function changemailAction() {
-		$this->view->render('profile/upload');
+		$validation = new Validate();
+		$posted_values = ['email' => ''];
+
+		if($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+				'email' => [
+					'display' => 'Email',
+					'required' => true,
+					'unique' => 'users',
+					'max' => 150,
+					'valid_email' => true
+				]
+			]);
+
+			if($validation->passed()) {
+				$user = currentUser();
+				$this->UsersModel->update($user->id, ['email' => $_POST['email']]);
+				Router::redirect('profile/settings');
+			}
+		}
+
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('profile/changemail');
 	}
 
 }
