@@ -27,12 +27,13 @@
             deleted TINYINT(4) DEFAULT 0,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             token VARCHAR(150),
-            verified TINYINT DEFAULT 0
+            verified TINYINT DEFAULT 0,
+            notify TINYINT DEFAULT 1
             );";
         $conn->exec($statement);
         $hash = password_hash('admin', PASSWORD_DEFAULT);
-        $statement = 'INSERT INTO users(username, email, `password`, fname, lname, token, verified)
-        VALUES("admin", "vesingh@student.wethinkcode.co.za", "'.$hash.'", "admin", "admin", "", 1)';
+        $statement = 'INSERT INTO users(username, email, `password`, fname, lname, token, verified, notify)
+        VALUES("admin", "vesingh@student.wethinkcode.co.za", "'.$hash.'", "admin", "admin", "", 1, 1)';
         $conn->exec($statement);
         $statement = "CREATE TABLE user_sessions(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

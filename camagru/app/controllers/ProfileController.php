@@ -33,7 +33,7 @@ class ProfileController extends Controller {
 					'display' => 'New Password',
 					'required' => true,
 					'min' => 6,
-					'lcase' => false
+					'lcase' => true
 				],
 				'confirm' => [
 					'display' => 'Confirm Password',
