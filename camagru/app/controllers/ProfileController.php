@@ -3,6 +3,7 @@
 class ProfileController extends Controller {
 	public function __construct($controller, $action) {
 		parent::__construct($controller, $action);
+		$this->load_model('Users');
 	}
 
 	public function indexAction() {
@@ -10,6 +11,16 @@ class ProfileController extends Controller {
 	}
 
 	public function settingsAction() {
+		if($_POST && $user = currentUser()){
+			if ($_POST['mail'] == 'on'){
+				$this->UsersModel->update($user->id, ['notify' => 1]);
+			}
+			else if ($_POST['mail'] == 'off') {
+				$this->UsersModel->update($user->id, ['notify' => 0]);
+			}
+		}
+
+
 		$this->view->render('profile/settings');
 	}
 
@@ -19,6 +30,8 @@ class ProfileController extends Controller {
 
 	public function changepassAction() {
 		$validation = new Validate();
+		$posted_values = ['oldpass' => '', 'newpass' => '',  'confirm' => ''];
+
 		if($_POST) {
 			//form validation
 			$validation->check($_POST, [
@@ -26,35 +39,95 @@ class ProfileController extends Controller {
 					'display' => "Old Password",
 					'required' => true
 				],
-				'newpass' => [
+				'password' => [
 					'display' => 'New Password',
 					'required' => true,
 					'min' => 6,
-					'lcase' => false
+					'lcase' => true
 				],
 				'confirm' => [
 					'display' => 'Confirm Password',
 					'required' => true,
-					'matches' => 'newpass'
+					'matches' => 'password'
 				]
 			]);
 			
-			if($validation->passed()) {
-				$user = $this->UsersModel->findByUsername($_POST['username']);
-				//dnd($user);
-				if ($user && password_verify(Input::get('password'), $user->password)) {
-					$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-					$user->login($remember);
-					Router::redirect('');
+			if($user = currentUser()) {
+				if ($user && password_verify(Input::get('oldpass'), $user->password)) {
+					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$this->UsersModel->update($user->id, ['password' => $password]);
+					Router::redirect('profile/settings');
 				}
 				else {
-					$validation->addError(["There is an error with your username or password.", ""]);
+					$validation->addError(["Old password is incorrect", ""]);
 				}
+			}
+			else {
+				$validation->addError(["You are not authorised to perform this action", ""]);
 			}
 		}
 
+		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
-		$this->view->render('register/login');
+		$this->view->render('profile/changepass');
+	}
+
+	public function changemailAction() {
+		$validation = new Validate();
+		$posted_values = ['email' => ''];
+
+		if($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+				'email' => [
+					'display' => 'Email',
+					'required' => true,
+					'unique' => 'users',
+					'max' => 150,
+					'valid_email' => true
+				]
+			]);
+
+			if($validation->passed()) {
+				$user = currentUser();
+				$this->UsersModel->update($user->id, ['email' => $_POST['email']]);
+				Router::redirect('profile/settings');
+			}
+
+		}
+
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('profile/changemail');
+	}
+
+	public function changeusernameAction() {
+		$validation = new Validate();
+		$posted_values = ['username' => ''];
+
+		if($_POST) {
+			$posted_values = posted_values($_POST);
+			$validation->check($_POST, [
+				'username' => [
+					'display' => 'Username',
+					'required' => true,
+					'unique' => 'users',
+					'min' => 6,
+					'max' => 150
+				]
+			]);
+
+			if($validation->passed()) {
+				$user = currentUser();
+				$this->UsersModel->update($user->id, ['username' => $_POST['username']]);
+				Router::redirect('profile/settings');
+			}
+
+		}
+
+		$this->view->post = $posted_values;
+		$this->view->displayErrors = $validation->displayErrors();
+		$this->view->render('profile/changeusername');
 	}
 
 }

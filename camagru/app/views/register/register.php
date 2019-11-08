@@ -5,6 +5,12 @@
 
 
 <?php $this->start('body'); ?>
+
+<div class="page-header text-center">
+  <h1>Welcome<br>
+  	<small>Create an Account</small></h1>
+</div>
+
 <div class="col-md-6 col-md-offset-3 well">
 <h3 class="text-center">Register Here</h3><hr>
 	<form action="" method="post" class="form">

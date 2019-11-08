@@ -1,4 +1,5 @@
-<?php $this->setSiteTitle(ucwords(currentUser()->fname)); ?>
+
+<?php $this->setSiteTitle(MENU_BRAND.' | '.ucwords(currentUser()->fname)); ?>
 <?php $this->start('body'); ?>
 
 <div class="page-header text-center">

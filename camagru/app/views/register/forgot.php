@@ -1,8 +1,14 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Forgot Password'); ?>
 <?php $this->start('head'); ?>
 
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
+
+<div class="page-header text-center">
+  <h1>Oh noes<br>
+  	<small>Forgot your password?</small></h1>
+</div>
 
 <div class="col-md-6 col-md-offset-3 well">
 	<form class="form" action="" method="post">

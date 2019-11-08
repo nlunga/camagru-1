@@ -1,16 +1,22 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Change Password'); ?>
 <?php $this->start('head'); ?>
 
 <?php $this->end(); ?>
 
 <?php $this->start('body'); ?>
 
+<div class="page-header text-center">
+  <h1>Sup <?=ucwords(currentUser()->fname)?><br>
+  	<small>Settings</small></h1>
+</div>
+
 <div class="col-md-6 col-md-offset-3 well">
 	<form class="form" action="" method="post">
 	<div class="bg-danger"><?=$this->displayErrors ?></div>
 		<h3 class="text-center">Change Password</h3>
 		<div class="form-group" >
-			<label for="email">Old Password</label>
-			<input type="email" id="email" name="email" class="form-control" required="">
+			<label for="oldpass">Old Password</label>
+			<input type="password" id="oldpass" name="oldpass" class="form-control" required="">
 		</div>
 		<div class="form-group" >
 			<label for="password">New Password</label>
