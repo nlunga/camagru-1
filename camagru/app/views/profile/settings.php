@@ -23,7 +23,7 @@
 		</div>
 	</form>
 
-	<form action="<?=PROOT?>profile/modpass" method="post" class="form">
+	<form action="<?=PROOT?>profile/changepass" method="post" class="form">
 		<div class="center" style="margin: 20px 0;">
 			<input type="submit" class="btn btn-primary btn-block" value="Change Password">
 		</div>

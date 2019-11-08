@@ -3,6 +3,7 @@
 class ProfileController extends Controller {
 	public function __construct($controller, $action) {
 		parent::__construct($controller, $action);
+		$this->load_model('Users');
 	}
 
 	public function indexAction() {
@@ -19,6 +20,8 @@ class ProfileController extends Controller {
 
 	public function changepassAction() {
 		$validation = new Validate();
+		$posted_values = ['oldpass' => '', 'newpass' => '',  'confirm' => ''];
+
 		if($_POST) {
 			//form validation
 			$validation->check($_POST, [
@@ -26,7 +29,7 @@ class ProfileController extends Controller {
 					'display' => "Old Password",
 					'required' => true
 				],
-				'newpass' => [
+				'password' => [
 					'display' => 'New Password',
 					'required' => true,
 					'min' => 6,
@@ -35,26 +38,27 @@ class ProfileController extends Controller {
 				'confirm' => [
 					'display' => 'Confirm Password',
 					'required' => true,
-					'matches' => 'newpass'
+					'matches' => 'password'
 				]
 			]);
 			
-			if($validation->passed()) {
-				$user = $this->UsersModel->findByUsername($_POST['username']);
-				//dnd($user);
-				if ($user && password_verify(Input::get('password'), $user->password)) {
-					$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
-					$user->login($remember);
-					Router::redirect('');
+			if($user = currentUser()) {
+				if ($user && password_verify(Input::get('oldpass'), $user->password)) {
+					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$this->UsersModel->update($user->id, ['password' => $password]);
 				}
 				else {
-					$validation->addError(["There is an error with your username or password.", ""]);
+					$validation->addError(["Old password is incorrect", ""]);
 				}
+			}
+			else {
+				$validation->addError(["You are not authorised to perform this action", ""]);
 			}
 		}
 
+		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
-		$this->view->render('register/login');
+		$this->view->render('profile/changepass');
 	}
 
 }
