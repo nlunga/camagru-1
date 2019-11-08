@@ -39,7 +39,7 @@
 			<label for="confirm">Confirm Password</label>
 			<input type="password" id="confirm" name="confirm" class="form-control" value="<?= $this->post['confirm'] ?>">
 		</div>
-		<div class="pull-right">
+		<div class="form-group pull-right">
 			<input type="submit" class="btn btn-primary btn-large" value="Register">
 		</div>
 	</form>
