@@ -1,4 +1,4 @@
-<?php $this->setSiteTitle('Settings'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Settings'); ?>
 
 <?php $this->start('head'); ?>
 <?php $this->end(); ?>

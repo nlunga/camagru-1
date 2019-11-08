@@ -1,4 +1,4 @@
-<?php $this->start('head'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Reset Password'); ?>
 
 <?php $this->end(); ?>
 

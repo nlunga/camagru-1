@@ -1,4 +1,4 @@
-<?php //$this->setSiteTitle('Home'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Home'); ?>
 
 <?php //$this->start('head'); ?>
 	<!-- <meta content="test" /> -->

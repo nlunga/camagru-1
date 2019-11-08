@@ -1,3 +1,5 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Discover'); ?>
+
 <?php $this->setSiteTitle('First Tools'); ?>
 <?php $this->start('body'); ?>
 <div class="page-header text-center">

@@ -1,3 +1,4 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Create'); ?>
 <?php $this->setSiteTitle('Create'); ?>
 <?php $this->start('body'); ?>
 <div class="page-header text-center">

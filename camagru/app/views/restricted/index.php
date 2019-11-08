@@ -1,4 +1,4 @@
-<?php $this->setSiteTitle('Access Restricted'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Restricted'); ?>
 <?php $this->start('body'); ?>
 <div class="page-header text-center">
   <h1>Oh noes<br>

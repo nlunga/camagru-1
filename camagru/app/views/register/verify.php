@@ -1,4 +1,4 @@
-<?php $this->setSiteTitle('Verify'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Verify'); ?>
 <?php $this->start('body'); ?>
 <div class="page-header text-center">
   <h1>Thank you<br>

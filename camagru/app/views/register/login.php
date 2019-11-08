@@ -1,3 +1,4 @@
+<?php $this->setSiteTitle(MENU_BRAND.' | Login'); ?>
 <?php $this->start('head'); ?>
 
 <?php $this->end(); ?>

@@ -46,6 +46,7 @@ class ProfileController extends Controller {
 				if ($user && password_verify(Input::get('oldpass'), $user->password)) {
 					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 					$this->UsersModel->update($user->id, ['password' => $password]);
+					Router::redirect('profile/settings');
 				}
 				else {
 					$validation->addError(["Old password is incorrect", ""]);
@@ -59,6 +60,10 @@ class ProfileController extends Controller {
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('profile/changepass');
+	}
+
+	public function changemailAction() {
+		$this->view->render('profile/upload');
 	}
 
 }
