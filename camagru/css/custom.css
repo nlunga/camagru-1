@@ -28,3 +28,16 @@ html::-webkit-scrollbar-thumb:hover {
 .img-responsive {
 	margin: 0 auto;
 }
+
+video {
+	margin: 0 auto;
+}
+
+#canvas {
+	display: none;
+}
+
+.select {
+	height: 35px;
+	padding: 3px;
+}

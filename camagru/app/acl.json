@@ -14,7 +14,8 @@
 		},
 		"Register": ["logout"],
 		"Tools": ["*"],
-		"Profile": ["*"]
+		"Profile": ["*"],
+		"Upload": ["*"]
 	},
 
 	"Admin": {

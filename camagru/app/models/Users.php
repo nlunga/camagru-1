@@ -106,21 +106,6 @@ class Users extends Model {
 		mail($email, $subject, $message, $headers);
 	}
 
-	public function changeUsername() {
-
-	}
-
-	public function changeEmail() {
-
-	}
-
-	public function changePassword() {
-		
-	}
-
-	public function emailNotif() {
-		
-	}
 
 
 }
