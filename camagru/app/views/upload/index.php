@@ -1,8 +1,5 @@
 <?php $this->setSiteTitle(MENU_BRAND.' | Create'); ?>
 
-<?php $this->start('head'); ?>
-<?php $this->end(); ?>
-
 
 <?php $this->start('body'); ?>
 
@@ -11,28 +8,29 @@
   	<small>Lets create shit</small></h1>
 </div>
 
-<div class="col-md-6 col-md-offset-3 well text-center">
-	<div>
-		<video class="thumbnail" id="video">Stream not available.</video>
+<div class="col-md-4 col-md-offset-4 well text-center">
 
-		<div class="text-center" style="display: flex; justify-content: space-around; width: 350px; margin: 0 auto;" >
-			<div style="margin: 0 20px; display:inline;">
-				<button id="photo-button" class="btn btn-primary btn-large form-group" onclick="vidOn()" style="margin: 0 auto; ">
-					Audio On
-				</button>
-			</div>
-			<div style="margin: 0 20px; display:inline;">
-				<button id="photo-button" class="btn btn-primary btn-large form-group" onclick="vidOff()" style=" margin: 0 auto; ">
-					Audio Off
-				</button>
-			</div>
+	<video class="thumbnail" id="video">Stream not available.</video>
+
+		<div class="center" style="margin: 10px 20px;">
+			<button id="photo-button" class="btn btn-primary btn-block" >
+				Snap
+			</button>
 		</div>
 
-		<button id="photo-button" class="btn btn-primary btn-large form-group" style="display: block; margin: 10px auto; width: 350px;">
-			Snap
-		</button>
+		<div class="btn-group">
+				<button id="photo-button" class="btn btn-primary" onclick="vidOn()" >
+					Audio On
+				</button>
+				<button id="photo-button" class="btn btn-primary" onclick="vidOff()" >
+					Audio Off
+				</button>
 
-		<select class="select" id="photo-filter" style="display: block; margin: 10px auto; width: 350px;">
+		</div>
+
+
+	<div class="center" style="margin: 10px 20px;">
+		<select class="select btn-block" id="photo-filter" >
 			<option value="none">Normal</option>
 			<option value="grayscale(100%)">Grayscale</option>
 			<option value="sepia(100%)">Sepia</option>
@@ -40,15 +38,26 @@
 			<option value="hue-rotate(90deg)">Hue</option>
 			<option value="blur(10px)">Blur</option>
 			<option value="contrast(200%)">Contrast</option>
-
 		</select>
-		<button id="clear-button" class="btn btn-primary btn-large text-center" style="display: block; margin: 10px auto; width: 350px;">Clear</button>
-		
+	</div>
+
+
+
+	<div class="center" style="margin: 10px 20px;">
+		<button id="clear-button" class="btn btn-primary btn-block">Clear</button>	
 	</div>
 
 	<div id="photos" style="margin: 10px 0;">
 		<canvas id="canvas"></canvas>
+
+		<div class="center" style="margin: 10px 20px;">
+			<button id="photo-save" class="btn btn-primary btn-block">
+				Save
+			</button>
+		</div>
+		
 	</div>
+
 </div>
 
 <script src="<?=PROOT?>/js/upload.js"></script>

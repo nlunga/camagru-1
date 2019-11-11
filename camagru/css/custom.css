@@ -31,6 +31,8 @@ html::-webkit-scrollbar-thumb:hover {
 
 video {
 	margin: 0 auto;
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
 }
 
 #canvas {

@@ -19,7 +19,7 @@
    
 	</head>
 	
-	<body >
+	<body>
 
 		<?php include 'main_menu.php' ?>
 

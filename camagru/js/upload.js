@@ -22,15 +22,13 @@ const photoButton = document.getElementById("photo-button");
 const clearButton = document.getElementById("clear-button");
 const photoFilter = document.getElementById("photo-filter");
 
-var localstream;
-
 //get media stream
 navigator.mediaDevices
 	.getUserMedia({ video: true, audio: false })
 	.then(function(stream) {
 		//link to video source
 		video.srcObject = stream;
-		localstream = stream;
+
 		//play video
 		video.play();
 	})
@@ -98,6 +96,10 @@ function takePicture() {
 		//set canvas props
 		canvas.width = width;
 		canvas.height = height;
+
+		//flips the image before drawing
+		context.setTransform(-1, 0, 0, 1, canvas.width, 0);
+
 		//draw an image of the video on the canvas
 		context.drawImage(video, 0, 0, width, height);
 
@@ -120,9 +122,8 @@ function takePicture() {
 }
 
 function vidOff() {
-	video.pause();
 	video.src = "";
-	localstream.getTracks()[0].stop();
+	video.srcObject.getTracks()[0].stop();
 
 	navigator.mediaDevices
 		.getUserMedia({ video: true, audio: false })
@@ -152,3 +153,15 @@ function vidOn() {
 			console.log(`Error: ${err}`);
 		});
 }
+
+document.getElementById("photo-save").addEventListener("click", function() {
+	alert("here");
+	const imgUrl = canvas.toDataURL("image/png");
+	var ajax = new XMLHttpRequest();
+	ajax.open("POST", "http://localhost:8080/camagru/camagru/upload", true);
+	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	ajax.onload = function() {
+		console.log(ajax.responseText);
+	};
+	ajax.send("img=" + imgUrl);
+});

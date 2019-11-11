@@ -35,27 +35,40 @@
         $statement = 'INSERT INTO users(username, email, `password`, fname, lname, token, verified, notify)
         VALUES("admin", "vesingh@student.wethinkcode.co.za", "'.$hash.'", "admin", "admin", "", 1, 1)';
         $conn->exec($statement);
+
+        $hash = password_hash('123456', PASSWORD_DEFAULT);
+        $statement = 'INSERT INTO users(username, email, `password`, fname, lname, token, verified, notify)
+        VALUES("beansontoast", "vishakha108@gmail.com", "'.$hash.'", "Jono", "bob", "", 1, 1)';
+        $conn->exec($statement);
+
+        $hash = password_hash('123456', PASSWORD_DEFAULT);
+        $statement = 'INSERT INTO users(username, email, `password`, fname, lname, token, verified, notify)
+        VALUES("deeznutz", "godalmighty@cuvox.de", "'.$hash.'", "God", "Almighty", "", 1, 1)';
+        $conn->exec($statement);
+
+
         $statement = "CREATE TABLE user_sessions(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
-            email VARCHAR(255) NOT NULL,
+            email VARCHAR(255),
             `session` VARCHAR(255)NOT NULL,
             user_agent VARCHAR(255) NOT NULL
             );";
         $conn->exec($statement);
 
         $statement = "CREATE TABLE posts(
-            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
+            post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            username INT NOT NULL,
             img TEXT,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
         $conn->exec($statement);
 
         $statement = "CREATE TABLE comments(
-            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            username INT NOT NULL,
             post_id INT NOT NULL,
-            user_id INT NOT NULL,
+            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
             comment TEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
@@ -64,7 +77,8 @@
         $statement = "CREATE TABLE likes(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             post_id INT NOT NULL,
-            user_id INT NOT NULL
+            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
+            username INT NOT NULL
             );";
         $conn->exec($statement);
     }

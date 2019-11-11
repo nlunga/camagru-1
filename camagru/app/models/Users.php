@@ -60,8 +60,8 @@ class Users extends Model {
 		// 	'conditions' => "user_agent = ? AND session = ?",
 		// 	'bind' => [Session::uagent_no_version(), Cookie::get(REMEMBER_ME_COOKIE_NAME)]
 		// ]);
-		if($userSession && $userSession->$user_id != '') {
-			$user = new self((int)$userSession->$user_id);
+		if($userSession && $userSession->user_id != '') {
+			$user = new self((int)$userSession->user_id);
 			if ($user) {
 				$user->login();
 			}
