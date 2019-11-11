@@ -8,7 +8,7 @@
 
 //global vars
 
-let width = 350,
+let width = 500,
 	height = 0,
 	filter = "none",
 	streaming = false;
@@ -26,7 +26,7 @@ var localstream;
 
 //get media stream
 navigator.mediaDevices
-	.getUserMedia({ video: true, audio: true })
+	.getUserMedia({ video: true, audio: false })
 	.then(function(stream) {
 		//link to video source
 		video.srcObject = stream;
