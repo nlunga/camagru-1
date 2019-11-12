@@ -27,7 +27,6 @@
 
 		</div>
 
-
 	<div class="center" style="margin: 10px 20px;">
 		<select class="select btn-block" id="photo-filter" >
 			<option value="none">Normal</option>
@@ -40,35 +39,28 @@
 		</select>
 	</div>
 
-
-
 	<div class="center" style="margin: 10px 20px;">
 		<button id="clear-button" class="btn btn-primary btn-block">Clear</button>	
 	</div>
 
-	<!-- <form action="<?//=PROOT?>upload/submit" method="post" class="form">
-		<div class="center" style="margin: 10px 20px;">
-			<input type="submit" class="btn btn-primary btn-block" value="Submit">
-		</div>
-	</form> -->
 
 	<div class="center" style="margin: 10px 20px;">
-			<button id="photo-save" class="btn btn-primary btn-block">
-				Save
-			</button>
-		</div>
-		<div class="center" style="margin: 10px 20px;">
-			<input type="file" id="upload" value="upload"/>
-		</div>
 
-
-
-	<div id="photos" style="margin: 10px 0;">
-		<canvas id="canvas"></canvas>
-
-
-		
+	<div class="thumbnail"  >
+		<canvas id="canvas" style="margin: 10px auto"></canvas>
 	</div>
+
+	<div>
+		<button id="photo-save" class="btn btn-primary btn-block">
+			Save
+		</button>
+	</div>
+	<div class="center" style="margin: 10px auto;">
+		<input type="file" id="upload" value="upload" class="btn btn-primary btn-block"/>
+	</div>
+
+	<!-- <div id="photos" style="margin: 10px 0;">
+	</div> -->
 
 </div>
 

@@ -9,7 +9,7 @@ let width = 500,
 
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
-const photos = document.getElementById("photos");
+//const photos = document.getElementById("photos");
 const photoButton = document.getElementById("photo-button");
 const clearButton = document.getElementById("clear-button");
 const photoFilter = document.getElementById("photo-filter");
@@ -55,7 +55,6 @@ photoButton.addEventListener(
 	"click",
 	function (e) {
 		takePicture();
-
 		e.preventDefault();
 	},
 	false
@@ -74,7 +73,8 @@ photoFilter.addEventListener("change", function (e) {
 //clear event
 clearButton.addEventListener("click", function (e) {
 	//clear photos
-	photos.innerHTML = "";
+	// photos.innerHTML = "";
+
 	//change filter to none
 	filter = "none";
 	//set video filter
@@ -99,6 +99,7 @@ function takePicture() {
 
 		//make canvas visible
 		canvas.style.display = "inline-block";
+
 
 		//draw an image of the video on the canvas
 		context.drawImage(video, 0, 0, width, height);
