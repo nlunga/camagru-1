@@ -43,25 +43,29 @@
 		<button id="clear-button" class="btn btn-primary btn-block">Clear</button>	
 	</div>
 
+	<h1>
+  	<small>Preview</small></h1>
+
+ <hr>
 
 	<div class="center" style="margin: 10px 20px;">
 
-	<div class="thumbnail"  >
-		<canvas id="canvas" style="margin: 10px auto"></canvas>
-	</div>
+		<div class="thumbnail"  >
+			<canvas id="canvas" style="margin: 10px auto"></canvas>
+		</div>
 
-	<div>
-		<button id="photo-save" class="btn btn-primary btn-block">
-			Save
-		</button>
-	</div>
-	<div class="center" style="margin: 10px auto;">
-		<input type="file" id="upload" value="upload" class="btn btn-primary btn-block"/>
-	</div>
+		<div>
+			<button id="photo-save" class="btn btn-primary btn-block">
+				Save
+			</button>
+		</div>
+		<div class="custom-file" style="margin: 10px auto;">
+			<input type="file" id="upload" value="upload" class="btn btn-primary btn-block" placeholder="Upload an image"/>
+		</div>
 
-	<!-- <div id="photos" style="margin: 10px 0;">
-	</div> -->
-
+		<!-- <div id="photos" style="margin: 10px 0;">
+		</div> -->
+	</div>
 </div>
 
 <script src="<?=PROOT?>/js/upload.js"></script>
