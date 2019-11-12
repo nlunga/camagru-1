@@ -1,6 +1,5 @@
 <?php $this->setSiteTitle(MENU_BRAND.' | Create'); ?>
 
-
 <?php $this->start('body'); ?>
 
 <div class="page-header text-center">
@@ -46,6 +45,15 @@
 	<div class="center" style="margin: 10px 20px;">
 		<button id="clear-button" class="btn btn-primary btn-block">Clear</button>	
 	</div>
+
+	<!-- <form action="<?//=PROOT?>upload/submit" method="post" class="form">
+		<div class="center" style="margin: 10px 20px;">
+			<input type="submit" class="btn btn-primary btn-block" value="Submit">
+		</div>
+	</form> -->
+
+
+
 
 	<div id="photos" style="margin: 10px 0;">
 		<canvas id="canvas"></canvas>

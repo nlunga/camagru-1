@@ -1,4 +1,4 @@
- <?php
+<?php
 
 class Model {
 	protected $_db, $_table, $_modelName, $_softDelete = false, $_columnNames = [];

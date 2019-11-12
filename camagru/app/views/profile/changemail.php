@@ -1,9 +1,4 @@
 <?php $this->setSiteTitle(MENU_BRAND.' | Change Email'); ?>
-
-<?php $this->start('head'); ?>
-
-<?php $this->end(); ?>
-
 <?php $this->start('body'); ?>
 
 <div class="page-header text-center">

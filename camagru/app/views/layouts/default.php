@@ -26,7 +26,7 @@
 		<div class="container-fluid" style="min-height:cal(100% - 125px);">
 			<?= $this->content('body'); ?>
 		</div>
-	
+
 
 	</body>
 

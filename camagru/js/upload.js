@@ -1,11 +1,3 @@
-// window.onload(function() {
-// 	$(".mdb-select").materialSelect();
-// });
-
-// window.addEventListener("load", function() {
-// 	$(".mdb-select").materialSelect();
-// });
-
 //global vars
 
 let width = 500,
@@ -24,22 +16,25 @@ const photoFilter = document.getElementById("photo-filter");
 
 //get media stream
 navigator.mediaDevices
-	.getUserMedia({ video: true, audio: false })
-	.then(function(stream) {
+	.getUserMedia({
+		video: true,
+		audio: false
+	})
+	.then(function (stream) {
 		//link to video source
 		video.srcObject = stream;
 
 		//play video
 		video.play();
 	})
-	.catch(function(err) {
+	.catch(function (err) {
 		console.log(`Error: ${err}`);
 	});
 
 //play when ready
 video.addEventListener(
 	"canplay",
-	function(e) {
+	function (e) {
 		if (!streaming) {
 			//set video canvas height
 			height = video.videoHeight / (video.videoWidth / width);
@@ -58,7 +53,7 @@ video.addEventListener(
 //photo button event
 photoButton.addEventListener(
 	"click",
-	function(e) {
+	function (e) {
 		takePicture();
 
 		e.preventDefault();
@@ -67,7 +62,7 @@ photoButton.addEventListener(
 );
 
 //filter event
-photoFilter.addEventListener("change", function(e) {
+photoFilter.addEventListener("change", function (e) {
 	//set filter to chosen option
 	filter = e.target.value;
 	//set filter to video
@@ -77,7 +72,7 @@ photoFilter.addEventListener("change", function(e) {
 });
 
 //clear event
-clearButton.addEventListener("click", function(e) {
+clearButton.addEventListener("click", function (e) {
 	//clear photos
 	photos.innerHTML = "";
 	//change filter to none
@@ -126,42 +121,48 @@ function vidOff() {
 	video.srcObject.getTracks()[0].stop();
 
 	navigator.mediaDevices
-		.getUserMedia({ video: true, audio: false })
-		.then(function(stream) {
+		.getUserMedia({
+			video: true,
+			audio: false
+		})
+		.then(function (stream) {
 			//link to video source
 			video.srcObject = stream;
 			localstream = stream;
 			//play video
 			video.play();
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			console.log(`Error: ${err}`);
 		});
 }
 
 function vidOn() {
 	navigator.mediaDevices
-		.getUserMedia({ video: true, audio: true })
-		.then(function(stream) {
+		.getUserMedia({
+			video: true,
+			audio: true
+		})
+		.then(function (stream) {
 			//link to video source
 			video.srcObject = stream;
 			localstream = stream;
 			//play video
 			video.play();
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			console.log(`Error: ${err}`);
 		});
 }
 
-document.getElementById("photo-save").addEventListener("click", function() {
-	alert("here");
+document.getElementById("photo-save").addEventListener("click", function () {
 	const imgUrl = canvas.toDataURL("image/png");
 	var ajax = new XMLHttpRequest();
 	ajax.open("POST", "http://localhost:8080/camagru/camagru/upload", true);
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajax.onload = function() {
-		console.log(ajax.responseText);
+	ajax.onload = function () {
+		if (ajax.status === 200)
+			console.log(ajax.responseText);
 	};
 	ajax.send("img=" + imgUrl);
 });

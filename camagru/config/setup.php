@@ -58,8 +58,8 @@
 
         $statement = "CREATE TABLE posts(
             post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            username INT NOT NULL,
-            img TEXT,
+            username VARCHAR(155) NOT NULL,
+            img LONGTEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
         $conn->exec($statement);
