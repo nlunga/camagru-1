@@ -81,6 +81,8 @@ clearButton.addEventListener("click", function (e) {
 	video.style.filter = filter;
 	//reset select list
 	photoFilter.selectedIndex = 0;
+
+	canvas.style.display = "none";
 });
 
 //take pic from canvas
@@ -94,6 +96,9 @@ function takePicture() {
 
 		//flips the image before drawing
 		context.setTransform(-1, 0, 0, 1, canvas.width, 0);
+
+		//make canvas visible
+		canvas.style.display = "inline-block";
 
 		//draw an image of the video on the canvas
 		context.drawImage(video, 0, 0, width, height);
@@ -109,10 +114,10 @@ function takePicture() {
 		img.setAttribute("class", "thumbnail");
 		img.setAttribute("style", "margin: 10px auto;");
 
-		img.style.filter = filter;
+		//img.style.filter = filter;
 
 		//add image to photos
-		photos.appendChild(img);
+		//photos.appendChild(img);
 	}
 }
 
@@ -158,11 +163,37 @@ function vidOn() {
 document.getElementById("photo-save").addEventListener("click", function () {
 	const imgUrl = canvas.toDataURL("image/png");
 	var ajax = new XMLHttpRequest();
-	ajax.open("POST", "http://localhost:8080/camagru/camagru/upload", true);
+	ajax.open("POST", "/camagru/camagru/upload/submit", true);
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	ajax.onload = function () {
 		if (ajax.status === 200)
 			console.log(ajax.responseText);
+		else if (ajax.status === 400)
+			console.log("oh shit");
 	};
 	ajax.send("img=" + imgUrl);
+});
+
+var upload = document.getElementById("upload");
+
+upload.addEventListener("change", (e) => {
+	if (upload.files.length > 0 && upload.files[0].type.match(/image\/*/)) {
+		var image = new Image();
+		var context = canvas.getContext('2d');
+		image.onload = () => {
+			if (image.width <= 500 && image.width <= 500) {
+				canvas.width = image.width;
+				canvas.height = image.height;
+				canvas.style.display = "inline-block";
+				context.drawImage(image, 0, 0);
+			} else {
+				canvas.width = 500;
+				canvas.height = 500;
+				canvas.style.display = "inline-block";
+				context.drawImage(image, 0, 0);
+			}
+
+		}
+		image.src = URL.createObjectURL(upload.files[0]);
+	}
 });

@@ -52,17 +52,21 @@
 		</div>
 	</form> -->
 
+	<div class="center" style="margin: 10px 20px;">
+			<button id="photo-save" class="btn btn-primary btn-block">
+				Save
+			</button>
+		</div>
+		<div class="center" style="margin: 10px 20px;">
+			<input type="file" id="upload" value="upload"/>
+		</div>
 
 
 
 	<div id="photos" style="margin: 10px 0;">
 		<canvas id="canvas"></canvas>
 
-		<div class="center" style="margin: 10px 20px;">
-			<button id="photo-save" class="btn btn-primary btn-block">
-				Save
-			</button>
-		</div>
+
 		
 	</div>
 
