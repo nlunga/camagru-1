@@ -113,9 +113,11 @@ function takePicture() {
 		img.setAttribute("class", "thumbnail");
 		img.setAttribute("style", "margin: 10px auto;");
 
-		img.style.filter = filter;
-
 		imgFilter = filter;
+
+		img.style.filter = filter;
+		canvas.style.filter = filter;
+
 
 		//make canvas visible
 		canvas.style.display = "inline-block";

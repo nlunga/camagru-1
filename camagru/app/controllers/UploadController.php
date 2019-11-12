@@ -14,6 +14,7 @@
 		}
 
 		public function submitAction() {
+			
 			if(isset($_POST['img'])) {
 				$data = $_POST['img'];
 				$data = str_replace('data:image/png;base64,', '', $data);
@@ -21,6 +22,7 @@
 				$data = base64_decode($data);
 				$image = imagecreatefromstring($data);
 
+				$filter = $_POST['filter'];
 				if ($filter == 'invert(100%)'){
 					imagefilter($image, IMG_FILTER_NEGATE);
 				}
