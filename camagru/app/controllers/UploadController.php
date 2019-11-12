@@ -21,6 +21,23 @@
 				$data = base64_decode($data);
 				$image = imagecreatefromstring($data);
 
+				if ($filter == 'invert(100%)'){
+					imagefilter($image, IMG_FILTER_NEGATE);
+				}
+				else if ($filter == 'grayscale(100%)'){
+					imagefilter($image, IMG_FILTER_GRAYSCALE);
+				}
+				else if ($filter == 'contrast(200%)'){
+					imagefilter($image, IMG_FILTER_CONTRAST, -50);
+				}
+				else if ($filter == 'blur(10px)'){
+					imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR, 1000);
+				}
+				else if($filter == 'sepia(100%)'){
+					imagefilter($image, IMG_FILTER_GRAYSCALE);
+					imagefilter($image, IMG_FILTER_COLORIZE, 100, 50, 0);
+				}
+
 				$user = $this->UsersModel->currentLoggedInUser()->username;
 
 				$file_name = time().rand().".jpg";

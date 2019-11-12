@@ -7,6 +7,8 @@ let width = 500,
 
 // DOM elements
 
+var imgFilter;
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 //const photos = document.getElementById("photos");
@@ -97,10 +99,6 @@ function takePicture() {
 		//flips the image before drawing
 		context.setTransform(-1, 0, 0, 1, canvas.width, 0);
 
-		//make canvas visible
-		canvas.style.display = "inline-block";
-
-
 		//draw an image of the video on the canvas
 		context.drawImage(video, 0, 0, width, height);
 
@@ -110,12 +108,18 @@ function takePicture() {
 		//create img element
 		const img = document.createElement("img");
 
-		//set  img src
+		//set img src
 		img.setAttribute("src", imgUrl);
 		img.setAttribute("class", "thumbnail");
 		img.setAttribute("style", "margin: 10px auto;");
 
-		//img.style.filter = filter;
+		img.style.filter = filter;
+
+		imgFilter = filter;
+
+		//make canvas visible
+		canvas.style.display = "inline-block";
+		canvas.setAttribute("class", "thumbnail");
 
 		//add image to photos
 		//photos.appendChild(img);
@@ -172,8 +176,10 @@ document.getElementById("photo-save").addEventListener("click", function () {
 		else if (ajax.status === 400)
 			console.log("oh shit");
 	};
-	ajax.send("img=" + imgUrl);
+	ajax.send("img=" + imgUrl + "&filter=" + imgFilter);
 });
+
+
 
 var upload = document.getElementById("upload");
 

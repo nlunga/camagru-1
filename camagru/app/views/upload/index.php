@@ -50,8 +50,8 @@
 
 	<div class="center" style="margin: 10px 20px;">
 
-		<div class="thumbnail"  >
-			<canvas id="canvas" style="margin: 10px auto"></canvas>
+		<div class="" style="margin: 10px auto">
+			<canvas id="canvas" ></canvas>
 		</div>
 
 		<div>
@@ -60,7 +60,7 @@
 			</button>
 		</div>
 		<div class="custom-file" style="margin: 10px auto;">
-			<input type="file" id="upload" value="upload" class="btn btn-primary btn-block" placeholder="Upload an image"/>
+			<input type="file" id="upload" value="upload" class="btn btn-primary btn-block"/>
 		</div>
 
 		<!-- <div id="photos" style="margin: 10px 0;">
