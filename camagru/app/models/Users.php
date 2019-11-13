@@ -106,6 +106,8 @@ class Users extends Model {
 		mail($email, $subject, $message, $headers);
 	}
 
-
+	public function getUsers(){
+		return $this->getData();
+	}
 
 }

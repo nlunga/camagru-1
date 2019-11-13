@@ -14,10 +14,13 @@ class HomeController extends Controller {
 		// $db = DB::getInstance();
 		//dnd($_SESSION);
 
+		$users = $this->UsersModel->getUsers();
 		$result = $this->PostsModel->getPosts();
 		$comments = $this->CommentsModel->getComments();
 		$_SESSION['comments'] = $comments;
 		$_SESSION['posts'] = $result;
+		$_SESSION['users'] = $users;
+		
 
 		$this->view->render('home/index');
 		
@@ -53,6 +56,7 @@ class HomeController extends Controller {
 	}
 
 	public function discoverAction() {
+		
 		$this->view->render('home/discover');
 	}
 }

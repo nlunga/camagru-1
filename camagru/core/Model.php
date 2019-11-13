@@ -133,7 +133,7 @@ class Model {
 
 	public function getData($user = []){
 		if ($user){
-			return $this->query("SELECT * FROM {$this->_table} WHERE userid='$user'")->results();
+			return $this->query("SELECT * FROM {$this->_table} WHERE user_id='$user'")->results();
 		}
 		return $this->query("SELECT * FROM {$this->_table}")->results();
 	}
