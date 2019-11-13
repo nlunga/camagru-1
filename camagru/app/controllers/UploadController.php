@@ -40,7 +40,7 @@
 					imagefilter($image, IMG_FILTER_COLORIZE, 100, 50, 0);
 				}
 
-				$user = $this->UsersModel->currentLoggedInUser()->username;
+				$user = $this->UsersModel->currentLoggedInUser()->id;
 
 				$file_name = time().rand().".jpg";
 				imagejpeg($image, ROOT."/imgs/".$file_name);

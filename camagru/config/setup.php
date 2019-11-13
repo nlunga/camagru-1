@@ -58,7 +58,7 @@
 
         $statement = "CREATE TABLE posts(
             post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(155) NOT NULL,
+            user_id INT NOT NULL,
             img LONGTEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
@@ -66,7 +66,7 @@
 
         $statement = "CREATE TABLE comments(
             comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            username INT NOT NULL,
+            user_id INT NOT NULL,
             post_id INT NOT NULL,
             FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
             comment TEXT NOT NULL,
@@ -78,7 +78,7 @@
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             post_id INT NOT NULL,
             FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
-            username INT NOT NULL
+            user_id INT NOT NULL
             );";
         $conn->exec($statement);
     }
