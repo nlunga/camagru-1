@@ -4,12 +4,23 @@ class HomeController extends Controller {
 	public function __construct($controller, $action) {
 		parent::__construct($controller, $action);
 		$this->view->setLayout('default');
+		$this->load_model('Users');
+		$this->load_model('Posts');
+		$this->load_model('Comments');
+		$this->load_model('Likes');
 	}
 
 	public function indexAction() {
 		// $db = DB::getInstance();
 		//dnd($_SESSION);
+
+		$results = $this->PostsModel->getPosts();
+		$comments = $this->CommentsModel->getComments();
+		$_SESSION['comments'] = $comments;
+		$_SESSION['posts'] = $result;
+
 		$this->view->render('home/index');
+		
 
 		// $contacts = $db->findFirst('users', [
 		// 	'conditions' => 'id = ?',

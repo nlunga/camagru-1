@@ -130,4 +130,11 @@ class Model {
 			$this->$key = $val;
 		}
 	}
+
+	public function getData($user = []){
+		if ($user){
+			return $this->query("SELECT * FROM {$this->_table} WHERE userid='$user'")->results();
+		}
+		return $this->query("SELECT * FROM {$this->_table}")->results();
+	}
 }
