@@ -8,7 +8,7 @@ class Posts extends Model {
 	}
 
 	public function uploadImage($img, $user_id) {
-		$fields = ['img' => $img, 'id' => $user_id];
+		$fields = ['img' => $img, 'user_id' => $user_id];
 		$this->insert($fields);
 	}
 

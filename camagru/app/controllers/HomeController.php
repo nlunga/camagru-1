@@ -14,7 +14,7 @@ class HomeController extends Controller {
 		// $db = DB::getInstance();
 		//dnd($_SESSION);
 
-		$results = $this->PostsModel->getPosts();
+		$result = $this->PostsModel->getPosts();
 		$comments = $this->CommentsModel->getComments();
 		$_SESSION['comments'] = $comments;
 		$_SESSION['posts'] = $result;

@@ -13,43 +13,17 @@
   	<small>Welcome to your feed</small></h1>
 </div>
 
+<?php $result = $_SESSION['posts']?>
+<?php $comments = $_SESSION['comments']?>
+
 <div class="container row">
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
-  <div class="col-xs-6 col-md-4">
-    <a href="#" class="thumbnail">
-      <img src="<?=PROOT?>app/imgs/placeholder.jpg" alt="Placeholder">
-    </a>
-  </div>
-
+  <?php foreach ($result as $res): ?>
+    <div class="col-xs-6 col-md-4">
+      <a href="#" class="thumbnail"> 
+        <img src="<?=PROOT."/imgs/". ($res->img)?>" alt="">
+      </a>
+    </div>
+  <?php endforeach;?>
 </div>
 
 

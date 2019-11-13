@@ -7,7 +7,7 @@
   	<small>Lets create shit</small></h1>
 </div>
 
-<div class="col-md-4 col-md-offset-4 well text-center">
+<div class="col-md-6 col-md-offset-3 well text-center">
 
 	<video class="thumbnail" id="video">Stream not available.</video>
 
@@ -48,10 +48,10 @@
 
  <hr>
 
-	<div class="center" style="margin: 10px 20px;">
+	<div class="center" style="margin: 10px auto;">
 
 		<div class="" style="margin: 10px auto">
-			<canvas id="canvas" ></canvas>
+			<canvas id="canvas"></canvas>
 		</div>
 
 		<div>
