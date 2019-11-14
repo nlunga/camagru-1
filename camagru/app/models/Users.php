@@ -14,7 +14,7 @@ class Users extends Model {
 
 		if ($user != '') {
 			if(is_int($user)) {
-				$u = $this->_db->findFirst('users', ['conditions' =>'id = ?', 'bind'=>[$user]]);
+				$u = $this->_db->findFirst('users', ['conditions' =>'`user_id` = ?', 'bind'=>[$user]]);
 			}
 			else {
 				$u = $this->_db->findFirst('users', ['conditions'=>'username = ?', 'bind'=>[$user]]);
@@ -41,13 +41,13 @@ class Users extends Model {
 	}
 
 	public function login($rememberMe = false) {
-		Session::set($this->_sessionName, $this->id);
+		Session::set($this->_sessionName, $this->user_id);
 		if ($rememberMe) {
 			$hash = md5(uniqid() + rand(0, 100));
 			$user_agent = Session::uagent_no_version();
 			Cookie::set($this->_cookieName, $hash, REMEMBER_ME_COOKIE_EXPIRY);
-			$fields = ['session'=>$hash, 'user_agent'=>$user_agent, 'user_id'=>$this->id];
-			$this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+			$fields = ['session'=>$hash, 'user_agent'=>$user_agent, '`user_id`'=>$this->user_id];
+			$this->_db->query("DELETE FROM user_sessions WHERE `user_id` = ? AND user_agent = ?", [$this->user_id, $user_agent]);
 			$this->_db->insert('user_sessions', $fields);
 		}
 	}
@@ -76,7 +76,7 @@ class Users extends Model {
 		//$user_agent = Session::uagent_no_version();
 		$userSession = UserSessions::getFromCookie(); //from refactoring
 		if ($userSession) $userSession->delete();
-		$this->_db->query("DELETE FROM user_sessions WHERE user_id = ? AND user_agent = ?", [$this->id, $user_agent]);
+		$this->_db->query("DELETE FROM user_sessions WHERE `user_id` = ? AND user_agent = ?", [$this->user_id, $user_agent]);
 		Session::delete(CURRENT_USER_SESSION_NAME);
 		if(Cookie::exists(REMEMBER_ME_COOKIE_NAME)) {
 			Cookie::delete (REMEMBER_ME_COOKIE_NAME);

@@ -17,7 +17,7 @@
         $conn = new PDO($DB_DSNF, $DB_USER, $DB_PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = "CREATE TABLE users(
-            user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(150) NOT NULL,
             email VARCHAR(255) NOT NULL,
             `password` VARCHAR(255)NOT NULL,
@@ -48,8 +48,8 @@
 
 
         $statement = "CREATE TABLE user_sessions(
-            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
+            sess_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            `user_id` INT NOT NULL,
             email VARCHAR(255),
             `session` VARCHAR(255)NOT NULL,
             user_agent VARCHAR(255) NOT NULL
@@ -58,7 +58,7 @@
 
         $statement = "CREATE TABLE posts(
             post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
+            `user_id` INT NOT NULL,
             img LONGTEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
@@ -66,7 +66,7 @@
 
         $statement = "CREATE TABLE comments(
             comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
+            `user_id` INT NOT NULL,
             post_id INT NOT NULL,
             FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
             comment TEXT NOT NULL,
@@ -75,10 +75,10 @@
         $conn->exec($statement);
 
         $statement = "CREATE TABLE likes(
-            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            like_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             post_id INT NOT NULL,
             FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
-            user_id INT NOT NULL
+            `user_id` INT NOT NULL
             );";
         $conn->exec($statement);
     }

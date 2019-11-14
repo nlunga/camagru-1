@@ -2,7 +2,7 @@
 
 class Model {
 	protected $_db, $_table, $_modelName, $_softDelete = false, $_columnNames = [];
-	public $id;
+	public $user_id;
 	
 	public function __construct($table){
 		$this->_db = DB::getInstance();
@@ -63,8 +63,8 @@ class Model {
 		return $result;
 	}
 
-	public function findById($id) {
-		return $this->findFirst(['conditions' => "id = ?", 'bind' => [$id]]);
+	public function findById($user_id) {
+		return $this->findFirst(['conditions' => "user_id = ?", 'bind' => [$user_id]]);
 	}
 
 	public function save() {
@@ -74,8 +74,8 @@ class Model {
 		}
 
 		//determine whethere to update or insert
-		if(property_exists($this, 'id') && $this->id != '') {
-			return $this->update($this->id, $fields);
+		if(property_exists($this, 'user_id') && $this->user_id != '') {
+			return $this->update($this->user_id, $fields);
 		}
 		else {
 			return $this->insert($fields);
@@ -87,18 +87,18 @@ class Model {
 		return $this->_db->insert($this->_table, $fields);
 	}
 
-	public function update($id, $fields) {
-		if(empty($fields) || $id == '') return false;
-		return $this->_db->update($this->_table, $id, $fields);
+	public function update($user_id, $fields) {
+		if(empty($fields) || $user_id == '') return false;
+		return $this->_db->update($this->_table, $user_id, $fields);
 	}
 
-	public function delete($id = '') {
-		if ($id == '' && $this->id == '') return false;
-		$id = ($id == '') ? $this->id : $id;
+	public function delete($user_id = '') {
+		if ($user_id == '' && $this->user_id == '') return false;
+		$user_id = ($user_id == '') ? $this->user_id : $user_id;
 		if ($this->_softDelete) {
-			return $this->update($id, ['deleted' => 1]);
+			return $this->update($user_id, ['deleted' => 1]);
 		}
-		return $this->_db->delete($this->_table, $id);
+		return $this->_db->delete($this->_table, $user_id);
 	}
 
 	public function query($sql, $bind = []) {
@@ -133,7 +133,7 @@ class Model {
 
 	public function getData($user = []){
 		if ($user){
-			return $this->query("SELECT * FROM {$this->_table} WHERE user_id='$user'")->results();
+			return $this->query("SELECT * FROM {$this->_table} WHERE `user_id`='$user'")->results();
 		}
 		return $this->query("SELECT * FROM {$this->_table}")->results();
 	}

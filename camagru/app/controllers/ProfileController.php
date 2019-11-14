@@ -13,10 +13,10 @@ class ProfileController extends Controller {
 	public function settingsAction() {
 		if($_POST && $user = currentUser()){
 			if ($_POST['mail'] == 'on'){
-				$this->UsersModel->update($user->id, ['notify' => 1]);
+				$this->UsersModel->update($user->user_id, ['notify' => 1]);
 			}
 			else if ($_POST['mail'] == 'off') {
-				$this->UsersModel->update($user->id, ['notify' => 0]);
+				$this->UsersModel->update($user->user_id, ['notify' => 0]);
 			}
 		}
 
@@ -55,7 +55,7 @@ class ProfileController extends Controller {
 			if($user = currentUser()) {
 				if ($user && password_verify(Input::get('oldpass'), $user->password)) {
 					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-					$this->UsersModel->update($user->id, ['password' => $password]);
+					$this->UsersModel->update($user->user_id, ['password' => $password]);
 					Router::redirect('profile/settings');
 				}
 				else {
@@ -90,7 +90,7 @@ class ProfileController extends Controller {
 
 			if($validation->passed()) {
 				$user = currentUser();
-				$this->UsersModel->update($user->id, ['email' => $_POST['email']]);
+				$this->UsersModel->update($user->user_id, ['email' => $_POST['email']]);
 				Router::redirect('profile/settings');
 			}
 
@@ -119,7 +119,7 @@ class ProfileController extends Controller {
 
 			if($validation->passed()) {
 				$user = currentUser();
-				$this->UsersModel->update($user->id, ['username' => $_POST['username']]);
+				$this->UsersModel->update($user->user_id, ['username' => $_POST['username']]);
 				Router::redirect('profile/settings');
 			}
 

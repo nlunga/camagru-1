@@ -50,8 +50,8 @@ class Validate {
 						case 'unique_update':
 						$t = explode(',', $rule_value);
 						$table = $t[0];
-						$id = $t[1];
-						$query = $this->_db->query("SELECT * FROM {$table} WHERE id != ? AND {$item} = ?", [$id, $value]);
+						$user_id = $t[1];
+						$query = $this->_db->query("SELECT * FROM {$table} WHERE `user_id` != ? AND {$item} = ?", [$user_id, $value]);
 						if ($query->count()) {
 							$this->addError(["{$display} already exists. Please choose another {$display}.", $item]);
 						}

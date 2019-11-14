@@ -26,7 +26,6 @@ class RegisterController extends Controller {
 			]);
 			if($validation->passed()) {
 				$user = $this->UsersModel->findByUsername($_POST['username']);
-				//dnd($user);
 				if ($user && password_verify(Input::get('password'), $user->password) && $user->verified == 1) {
 					$remember = (isset($_POST['remember_me']) && Input::get('remember_me')) ? true : false;
 					$user->login($remember);
@@ -114,8 +113,8 @@ class RegisterController extends Controller {
 		$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
 		if($result->email){
 			if ($result->token){
-				$this->UsersModel->update($result->id, ['verified' => 1]);
-				$this->UsersModel->update($result->id, ['token' => '']);
+				$this->UsersModel->update($result->user_id, ['verified' => 1]);
+				$this->UsersModel->update($result->user_id, ['token' => '']);
 				$this->view->render('register/verify');
 			}
 		}
@@ -145,7 +144,7 @@ class RegisterController extends Controller {
 			if($result->email) {
 				if ($result->token == '' && $result->verified == 1) {
 					$token = bin2hex(random_bytes(20));
-					$this->UsersModel->update($result->id, ['token' => $token]);
+					$this->UsersModel->update($result->user_id, ['token' => $token]);
 					$message = "<a href='http://localhost:8080/camagru/camagru/register/resetpass?token=$token'>Click here to reset your pasword.</a>";
 					$this->UsersModel->sendMail($_POST['email'], "Camagru Password Reset Request", $message);
 					Router::redirect('register/login');
@@ -193,8 +192,8 @@ class RegisterController extends Controller {
 			if ($result->email) {
 				if ($result->token == $token && $result->verified == 1) {
 					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-					$this->UsersModel->update($result->id, ['password' => $password]);
-					$this->UsersModel->update($result->id, ['token' => '']);
+					$this->UsersModel->update($result->user_id, ['password' => $password]);
+					$this->UsersModel->update($result->user_id, ['token' => '']);
 					Router::redirect('register/login');
 				}
 				else{

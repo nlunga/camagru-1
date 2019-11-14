@@ -10,7 +10,7 @@
 <?php $result = $_SESSION['posts']?>
 <?php $comments = $_SESSION['comments']?>
 <?php $users = $_SESSION['users']?>
-<?php dnd($_SESSION['users']); ?>
+
 
 <div class="container row">
   <?php foreach ($users as $u): ?>

@@ -130,7 +130,7 @@ class DB {
 		return false;
 	}
 
-	public function update($table, $id, $fields = []) {
+	public function update($table, $user_id, $fields = []) {
 		$fieldString = '';
 		$values = [];
 		foreach($fields as $field => $value) {
@@ -140,15 +140,15 @@ class DB {
 		$fieldString = trim($fieldString);
 		$fieldString = rtrim($fieldString, ',');
 
-		$sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
+		$sql = "UPDATE {$table} SET {$fieldString} WHERE `user_id` = {$user_id}";
 		if(!$this->query($sql, $values)->error()) {
 			return true;
 		}
 		return false;
 	}
 
-	public function delete($table, $id) {
-	$sql = "DELETE FROM {$table} WHERE id = {$id}";
+	public function delete($table, $user_id) {
+	$sql = "DELETE FROM {$table} WHERE `user_id` = {$user_id}";
 	if(!$this->query($sql)->error()) {
 		return true;
 	}

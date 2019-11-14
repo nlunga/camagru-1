@@ -26,7 +26,7 @@ class HomeController extends Controller {
 		
 
 		// $contacts = $db->findFirst('users', [
-		// 	'conditions' => 'id = ?',
+		// 	'conditions' => 'user_id = ?',
 		// 	'bind' => [1],
 		// ]);
 		// dnd($contacts);
