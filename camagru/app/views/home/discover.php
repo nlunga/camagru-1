@@ -15,7 +15,7 @@
   <?php foreach ($users as $u): ?>
     <div class="col-xs-6 col-md-4 text-center">
       <a href="#" class="thumbnail"> 
-        <p><?=$u->username?></p> <br>
+        <p class="btn btn-large"><?=$u->username?></p> <br>
       </a>
     </div>
   <?php endforeach;?>

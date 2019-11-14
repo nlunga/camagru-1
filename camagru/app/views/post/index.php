@@ -19,11 +19,12 @@
 
   <div class="panel panel-default" style="padding: 20px">
 
-    <p><span class="glyphicon glyphicon-heart"> How many?</span>
+    <p><span class="glyphicon glyphicon-heart"> </span>
       <?php if(currentUser()) :?>
-          <button type="button" id="likebtn" class="btn btn-default btn-sm" onclick="like()">
-            <span class=""></span> Like
-          </button>
+        <form action="" method="post">
+          <input type="hidden" id="postid" name="postid" value="<?=($post->post_id)?>">
+          <input class="btn btn-danger btn-xs" type="submit" name="likebtn" id="likebtn" value="Like">
+        </form>
       <?php endif;?>
     </p>
 
@@ -67,7 +68,7 @@
 
 </div>
 
-
+<script src="<?=PROOT?>/js/likes.js"></script>
 
 
 <?php $this->end(); ?>

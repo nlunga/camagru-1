@@ -41,6 +41,13 @@ class PostController extends Controller {
 				header("Refresh:0");
 			}
 
+			if(array_key_exists('likebtn', $_POST)){
+				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+				$post_id = $_POST['postid'];
+				$this->LikesModel->like($post_id, $user_id);
+				header("Refresh:0");
+			}
+
 			else if (array_key_exists('addcomm', $_POST)) {
 				$validation->check($_POST, [
 					'addcomm' => [

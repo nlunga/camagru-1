@@ -4,9 +4,23 @@ class ProfileController extends Controller {
 	public function __construct($controller, $action) {
 		parent::__construct($controller, $action);
 		$this->load_model('Users');
+		$this->load_model('Posts');
 	}
 
 	public function indexAction() {
+		$user_id = currentUser()->user_id;
+		$user_posts = $this->PostsModel->getUserPosts($user_id);
+		$_SESSION['u_posts'] = $user_posts;
+
+		if($_POST) {
+			if(array_key_exists('delete', $_POST)) {
+				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+				$post_id = $_POST['postid'];
+				$this->PostsModel->delPost($post_id, $user_id);
+				header("Refresh:0");
+			}
+		}
+
 		$this->view->render('profile/index');
 	}
 
@@ -19,7 +33,6 @@ class ProfileController extends Controller {
 				$this->UsersModel->update($user->user_id, ['notify' => 0]);
 			}
 		}
-
 
 		$this->view->render('profile/settings');
 	}

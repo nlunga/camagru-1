@@ -11,12 +11,11 @@ class LikeController extends Controller {
 		$this->load_model('Likes');
 	}
 
-	public function likeAction($params) {
-		$arr = array('post_id' => $params, 'user_id' => currentUser()->user_id);
-		$this->LikesModel->like($arr);
-		Router::redirect('');
-	}
+	// public function likeAction($params) {
+	// 	$arr = array('post_id' => $params, 'user_id' => currentUser()->user_id);
+	// 	$this->LikesModel->like($arr);
+	// 	Router::redirect('');
+	// }
 
 }
-
 ?>

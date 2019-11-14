@@ -25,4 +25,9 @@ class Posts extends Model {
 		return $this->findFirst($fields);
 	}
 
+	public function delPost($post_id, $user_id) {
+		$fields = ['post_id' => $post_id, 'user_id' => $user_id];
+		$this->query("DELETE FROM posts WHERE post_id = {$post_id} AND `user_id` = {$user_id}");
+	}
+
 }
