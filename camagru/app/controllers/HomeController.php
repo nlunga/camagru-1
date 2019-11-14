@@ -21,20 +21,18 @@ class HomeController extends Controller {
 		$_SESSION['posts'] = $result;
 		$_SESSION['users'] = $users;
 
-		$posted_values = ['comment' => ''];
-
 		$validation = new Validate();
 
 		if($_POST){
 			
-			if($_POST['delcomm']){
+			if(array_key_exists('delcomm', $_POST)){
 				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
-				$post_id = $_POST['postid'];
-				$this->CommentsModel->delComment($post_id, $user_id);
+				$comm_id = $_POST['commid'];
+				$this->CommentsModel->delComment($comm_id, $user_id);
+				header("Refresh:0");
 			}
 
-			else if ($_POST['addcomm']) {
-				echo"here";
+			else if (array_key_exists('addcomm', $_POST)) {
 				$validation->check($_POST, [
 					'addcomm' => [
 						'display' => "Comment",
@@ -46,12 +44,11 @@ class HomeController extends Controller {
 					$post_id = $_POST['postid'];
 					$comment = htmlspecialchars($_POST['addcomm']);
 					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
-					$this->view->render('home/index');
+					header("Refresh:0");
 				}
 			}	
 		}
 		
-		$this->view->post = $posted_values;
 		$this->view->render('home/index');
 		
 

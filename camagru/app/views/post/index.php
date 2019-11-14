@@ -1,9 +1,9 @@
-<?php $this->setSiteTitle(MENU_BRAND.' | Discover'); ?>
+<?php $this->setSiteTitle(MENU_BRAND.' | Post'); ?>
 
 <?php $this->start('body'); ?>
 
 <div class="page-header text-center">
-  <h1>Discover</h1>
+  <h1>Post</h1>
 </div>
 
 <?php $result = $_SESSION['posts']?>

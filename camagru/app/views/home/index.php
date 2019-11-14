@@ -50,7 +50,7 @@
 
                 <?php if(currentUser() && currentUser()->user_id == $comm->user_id) :?>
                 <form action="" method="post">
-                  <input type="hidden" id="postid" name="postid" value="<?=($res->post_id)?>">
+                  <input type="hidden" id="commid" name="commid" value="<?=($comm->comment_id)?>">
                   <input type="submit" id="delcomm" name="delcomm" class="btn btn-primary btn-xs pull-right" value="Delete">
                 </form>
                 <?php endif;?>
@@ -65,11 +65,11 @@
             <form action="" method="post">
               <div class="form-group">
                 <label for="addcomm">Add Comment</label> 
-                <input type="text" id="addcomm" name="addcomm" class="form-control" value="<?= $this->post['comment'] ?>">
+                <input type="text" id="addcomm" name="addcomm" class="form-control" value="">
                 <input type="hidden" id="postid" name="postid" value="<?=($res->post_id)?>">
               </div>
               <div class="form-group text-center">
-                <input type="submit" class="btn btn-primary btn-block" value="Add">
+                <input type="submit" name="submit" class="btn btn-primary btn-block" value="Add">
               </div>
             </form>
         <?php endif;?>
