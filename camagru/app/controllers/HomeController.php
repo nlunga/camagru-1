@@ -25,9 +25,16 @@ class HomeController extends Controller {
 
 		$validation = new Validate();
 
-		if ($_POST) {
+		if($_POST){
+			
+			if($_POST['delcomm']){
+				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+				$post_id = $_POST['postid'];
+				$this->CommentsModel->delComment($post_id, $user_id);
+			}
 
-			if($_POST['addcomm']) {
+			else if ($_POST['addcomm']) {
+				echo"here";
 				$validation->check($_POST, [
 					'addcomm' => [
 						'display' => "Comment",
@@ -39,12 +46,9 @@ class HomeController extends Controller {
 					$post_id = $_POST['postid'];
 					$comment = htmlspecialchars($_POST['addcomm']);
 					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
+					$this->view->render('home/index');
 				}
-			}
-			
-
-		
-		
+			}	
 		}
 		
 		$this->view->post = $posted_values;

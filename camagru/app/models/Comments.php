@@ -16,6 +16,11 @@ class Comments extends Model {
 		$this->insert($fields);
 	}
 
+	public function delComment($post_id, $user_id) {
+		$fields = ['post_id' => $post_id, 'user_id' => $user_id];
+		$this->query("DELETE FROM comments WHERE post_id = {$post_id} AND `user_id` = {$user_id}");
+	}
+
 }
 
 ?>

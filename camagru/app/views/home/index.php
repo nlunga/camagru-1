@@ -48,7 +48,15 @@
 
                 <?php endforeach;?>
 
+                <?php if(currentUser() && currentUser()->user_id == $comm->user_id) :?>
+                <form action="" method="post">
+                  <input type="hidden" id="postid" name="postid" value="<?=($res->post_id)?>">
+                  <input type="submit" id="delcomm" name="delcomm" class="btn btn-primary btn-xs pull-right" value="Delete">
+                </form>
+                <?php endif;?>
               <p class="comments"><?=htmlspecialchars($comm->comment)?></p>
+              
+
             </div>
           <?php endif;?>
         <?php endforeach;?>

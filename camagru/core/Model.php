@@ -85,7 +85,14 @@ class Model {
 	public function insert($fields) {
 		if(empty($fields)) return false;
 		return $this->_db->insert($this->_table, $fields);
+		
 	}
+
+	// public function remove($fields) {
+	// 	if(empty($fields)) return false;
+	// 	$this->query()
+		
+	// }
 
 	public function update($user_id, $fields) {
 		if(empty($fields) || $user_id == '') return false;
@@ -137,4 +144,6 @@ class Model {
 		}
 		return $this->query("SELECT * FROM {$this->_table}")->results();
 	}
+
+
 }
