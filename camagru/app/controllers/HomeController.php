@@ -20,8 +20,34 @@ class HomeController extends Controller {
 		$_SESSION['comments'] = $comments;
 		$_SESSION['posts'] = $result;
 		$_SESSION['users'] = $users;
-		
 
+		$posted_values = ['comment' => ''];
+
+		$validation = new Validate();
+
+		if ($_POST) {
+
+			if($_POST['addcomm']) {
+				$validation->check($_POST, [
+					'addcomm' => [
+						'display' => "Comment",
+						'required' => true
+					]
+				]);
+				if($validation->passed()) {
+					$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+					$post_id = $_POST['postid'];
+					$comment = htmlspecialchars($_POST['addcomm']);
+					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
+				}
+			}
+			
+
+		
+		
+		}
+		
+		$this->view->post = $posted_values;
 		$this->view->render('home/index');
 		
 
