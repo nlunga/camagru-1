@@ -14,12 +14,24 @@ class PostController extends Controller {
 	public function indexAction() {
 
 		$p = $_GET['p'];
-		$post = $this->PostsModel->findPost($p);
+		try {
+			$post = $this->PostsModel->findPost($p);
+		} catch (Exception $e){
+			
+		}
+		
 		$_SESSION['post_id'] = $post;
 		//dnd($post);
 
+		$users = $this->UsersModel->getUsers();
+		$result = $this->PostsModel->getPosts();
+		$comments = $this->CommentsModel->getComments();
+		$_SESSION['comments'] = $comments;
+		$_SESSION['posts'] = $result;
+		$_SESSION['users'] = $users;
+
 		$validation = new Validate();
-		
+
 		if($_POST){
 			
 			if(array_key_exists('delcomm', $_POST)){
@@ -37,6 +49,7 @@ class PostController extends Controller {
 					]
 				]);
 				if($validation->passed()) {
+					echo "here";
 					$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
 					$post_id = $_POST['postid'];
 					$comment = htmlspecialchars($_POST['addcomm']);

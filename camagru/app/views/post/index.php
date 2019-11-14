@@ -11,13 +11,13 @@
 <?php $users = $_SESSION['users']?>
 <?php $post = $_SESSION['post_id']?>
 
-<div class="col-md-6 col-md-offset-3 well">
+<div class="col-md-4 col-md-offset-4 well">
 
   <div class="thumbnail">
     <img  src="<?=PROOT.'/imgs/'. ($post->img)?>" alt="" >
   </div>
 
-  <div class="panel">
+  <div class="panel panel-default" style="padding: 20px">
 
     <p><span class="glyphicon glyphicon-heart"> How many?</span>
       <?php if(currentUser()) :?>
@@ -55,7 +55,7 @@
         <div class="form-group">
           <label for="addcomm">Add Comment</label> 
           <input type="text" id="addcomm" name="addcomm" class="form-control" value="">
-          <input type="hidden" id="postid" name="postid" value="<?=($res->post_id)?>">
+          <input type="hidden" id="postid" name="postid" value="<?=($post->post_id)?>">
         </div>
         <div class="form-group text-center">
           <input type="submit" name="submit" class="btn btn-primary btn-block" value="Add">
