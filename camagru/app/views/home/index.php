@@ -21,7 +21,7 @@
   <?php foreach ($result as $res): ?>
     <div class="col-xs-6 col-md-4">
       
-      <a href="#" class="thumbnail"> 
+      <a href="<?=PROOT."post?p=".$res->post_id?>" class="thumbnail"> 
         <img src="<?=PROOT."/imgs/". ($res->img)?>" alt="">
       </a>
 

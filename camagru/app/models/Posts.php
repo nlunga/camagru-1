@@ -20,4 +20,9 @@ class Posts extends Model {
 		return $this->getData($user);
 	}
 
+	public function findPost($p) {
+		$fields = ['conditions' => 'post_id = ?', 'bind'=>[$p]];
+		return $this->findFirst($fields);
+	}
+
 }

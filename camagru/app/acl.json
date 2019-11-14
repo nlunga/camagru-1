@@ -5,7 +5,8 @@
 		},
 		"Home": ["*"],
 		"Register": ["login", "register", "verify", "forgot", "changepass"],
-		"Restricted": ["*"]
+		"Restricted": ["*"],
+		"Post": ["*"]
 	},
 
 	"LoggedIn": {

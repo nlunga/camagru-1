@@ -12,7 +12,40 @@ class PostController extends Controller {
 	}
 
 	public function indexAction() {
-		echo "hello world";
+
+		$p = $_GET['p'];
+		$post = $this->PostsModel->findPost($p);
+		$_SESSION['post_id'] = $post;
+		//dnd($post);
+
+		$validation = new Validate();
+		
+		if($_POST){
+			
+			if(array_key_exists('delcomm', $_POST)){
+				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+				$comm_id = $_POST['commid'];
+				$this->CommentsModel->delComment($comm_id, $user_id);
+				header("Refresh:0");
+			}
+
+			else if (array_key_exists('addcomm', $_POST)) {
+				$validation->check($_POST, [
+					'addcomm' => [
+						'display' => "Comment",
+						'required' => true
+					]
+				]);
+				if($validation->passed()) {
+					$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+					$post_id = $_POST['postid'];
+					$comment = htmlspecialchars($_POST['addcomm']);
+					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
+					header("Refresh:0");
+				}
+			}	
+		}
+
 		$this->view->render('post/index');
 	}
 
