@@ -19,7 +19,7 @@
 				<form action="" method="post" class="form">
 					<div class="form-group text-center">
 						<input type="hidden" id="postid" name="postid" value="<?=($post->post_id)?>">
-						<input class="btn btn-warning btn-sm btn-block"type="submit" id="delete" name="delete" value="Delete">
+						<input class="btn btn-default btn-sm btn-block"type="submit" id="delete" name="delete" value="Delete">
 					</div>
 				</form>
 				<hr>
