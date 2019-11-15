@@ -15,6 +15,9 @@ class PostController extends Controller {
 
 		$p = $_GET['p'];
 		try {
+			//$this->PostsModel->query("SELECT * FROM posts WHERE post_id = ?", [$p]);
+			//$fields = ['conditions' => 'post_id = ?', 'bind'=>[$p]];
+			//$post = $this->PostsModel->find($fields);
 			$post = $this->PostsModel->findPost($p);
 		} catch (Exception $e){
 			

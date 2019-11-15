@@ -35,7 +35,7 @@
         <div>
           <?php foreach ($_SESSION['users'] as $user):?>
               <?php if ($comm->user_id == $user->user_id):?>
-                <a href="#"><?=$user->username?></a>
+                <a href="<?=PROOT."profile/user?user=".$user->user_id?>"><?=$user->username?></a>
               <?php endif;?>
 
             <?php endforeach;?>

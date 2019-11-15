@@ -17,6 +17,7 @@
 <?php $comments = $_SESSION['comments']?>
 <?php $users = $_SESSION['users']?>
 
+
 <div class="container row">
   <?php foreach ($result as $res): ?>
     <div class="col-xs-6 col-md-4">

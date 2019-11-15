@@ -143,5 +143,19 @@ class ProfileController extends Controller {
 		$this->view->render('profile/changeusername');
 	}
 
+	public function userAction() {
+		
+		$u = $_GET['user'];
+		$user = $this->UsersModel->findById($u);
+		$_SESSION['browse'] = $user;
+
+		//$users = $this->UsersModel->getUsers();
+		$result = $this->PostsModel->getUserPosts($user->user_id);
+		$_SESSION['u_posts'] = $result;
+		//$_SESSION['users'] = $users;
+
+		$this->view->render('profile/user');
+	}
+
 }
 ?>
