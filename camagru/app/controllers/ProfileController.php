@@ -147,12 +147,10 @@ class ProfileController extends Controller {
 		
 		$u = $_GET['user'];
 		$user = $this->UsersModel->findById($u);
-		$_SESSION['browse'] = $user;
+		$this->view->data['user'] = $user;
 
-		//$users = $this->UsersModel->getUsers();
 		$result = $this->PostsModel->getUserPosts($user->user_id);
-		$_SESSION['u_posts'] = $result;
-		//$_SESSION['users'] = $users;
+		$this->view->data['posts'] = $result;
 
 		$this->view->render('profile/user');
 	}

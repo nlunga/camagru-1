@@ -20,6 +20,10 @@ class Likes extends Model {
 		}
 
 	}
+
+	public function countLikes($post_id) {
+		return count($this->find(['conditions' => 'post_id = ?', 'bind' => [$post_id]]));
+	}
 }
 
 ?>

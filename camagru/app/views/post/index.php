@@ -6,11 +6,11 @@
   <h1>Post</h1>
 </div>
 
-<?php $result = $_SESSION['posts']?>
-<?php $comments = $_SESSION['comments']?>
-<?php $users = $_SESSION['users']?>
-<?php $post = $_SESSION['post_id']?>
-
+<?php $result = $_SESSION['posts'];?>
+<?php $comments = $_SESSION['comments'];?>
+<?php $users = $_SESSION['users'];?>
+<?php $post = $this->data['post'];?>
+<?php $countlikes = $_SESSION['countLike'];?>
 <div class="col-md-4 col-md-offset-4 well">
 
   <div class="thumbnail">
@@ -20,12 +20,13 @@
   <div class="panel panel-default" style="padding: 20px">
 
     <p><span class="glyphicon glyphicon-heart"> </span>
-      <?php if(currentUser()) :?>
+      <span><?=($countlikes)?></span>
+      <?php if(currentUser()) {?>
         <form action="" method="post">
-          <input type="hidden" id="postid" name="postid" value="<?=($post->post_id)?>">
-          <input class="btn btn-danger btn-xs" type="submit" name="likebtn" id="likebtn" value="Like">
+          <input type="hidden" id="postid" name="postid" value="<?=$post->post_id?>"/>
+          <input class="btn btn-danger btn-xs" type="submit" name="likebtn" id="likebtn" value="Like"/>
         </form>
-      <?php endif;?>
+      <?php }?>
     </p>
 
     <h4 class=""><small>Comments</small></h4>
@@ -65,7 +66,6 @@
   <?php endif;?>
 
   </div>
-
 </div>
 
 <script src="<?=PROOT?>/js/likes.js"></script>

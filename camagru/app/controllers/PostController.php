@@ -15,15 +15,16 @@ class PostController extends Controller {
 
 		$p = $_GET['p'];
 		try {
-			//$this->PostsModel->query("SELECT * FROM posts WHERE post_id = ?", [$p]);
+			//$this->view->data['post'] = ($this->PostsModel->query("SELECT * FROM posts WHERE post_id = ?", [$p]));
+			//var_dump($this->view->data['post']);
 			//$fields = ['conditions' => 'post_id = ?', 'bind'=>[$p]];
-			//$post = $this->PostsModel->find($fields);
-			$post = $this->PostsModel->findPost($p);
+			$post = $this->PostsModel->findFirst(['conditions' => "post_id = ?", 'bind' => [$p]]);//['result'];
+			$this->view->data['post'] = $post;
+			//$post = $this->PostsModel->findPost($p);
 		} catch (Exception $e){
 			
 		}
 		
-		$_SESSION['post_id'] = $post;
 		//dnd($post);
 
 		$users = $this->UsersModel->getUsers();
@@ -32,6 +33,8 @@ class PostController extends Controller {
 		$_SESSION['comments'] = $comments;
 		$_SESSION['posts'] = $result;
 		$_SESSION['users'] = $users;
+		$countlikes = $this->LikesModel->countLikes($post->post_id);
+		$_SESSION['countLike'] = $countlikes;
 
 		$validation = new Validate();
 
