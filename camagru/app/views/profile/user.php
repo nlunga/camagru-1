@@ -19,7 +19,7 @@
 				<a href="<?=PROOT."post?p=".$post->post_id?>" class="thumbnail"> 
 					<img src="<?=PROOT."/imgs/". ($post->img)?>" alt="">
 				</a>
-				<?php if(currentUser()->user_id == $post->user_id):?>
+				<?php if(currentUser() && currentUser()->user_id == $post->user_id):?>
 				<form action="" method="post" class="form">
 					<div class="form-group text-center">
 						<input type="hidden" id="postid" name="postid" value="<?=($post->post_id)?>">

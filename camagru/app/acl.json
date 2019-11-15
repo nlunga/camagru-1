@@ -1,12 +1,19 @@
 {
 	"Guest": {
 		"denied": {
-			"Profile": ["*"]
+			"Profile": [
+				"changemail",
+				"changepass",
+				"changeusername",
+				"index",
+				"settings"
+			]
 		},
 		"Home": ["*"],
 		"Register": ["login", "register", "verify", "forgot", "changepass"],
 		"Restricted": ["*"],
-		"Post": ["*"]
+		"Post": ["*"],
+		"Profile": ["user"]
 	},
 
 	"LoggedIn": {

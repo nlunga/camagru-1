@@ -53,6 +53,7 @@ class PostController extends Controller {
 				$post_id = $_POST['postid'];
 				//echo $user_id." ".$post_id."\n";
 				$this->LikesModel->like($post_id, $user_id);
+				$this->likeMail($post_id, $user_id);
 				header("Refresh:0");
 			}
 
@@ -69,12 +70,31 @@ class PostController extends Controller {
 					$post_id = $_POST['postid'];
 					$comment = htmlspecialchars($_POST['addcomm']);
 					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
+					$this->commentMail($post_id, $user_id, $comment);
 					header("Refresh:0");
 				}
 			}	
 		}
 
 		$this->view->render('post/index');
+	}
+
+	public function likeMail($post_id, $user_id) {
+		$user = $this->UsersModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$poster = $this->UsersModel->findFirst(['conditions' => '`user_id` = ?', 'bind' => [$user_id]]);
+		if($user && $user->notify == 1) {
+			$message = "<p><?=$poster->fname?> liked on your post</p>";
+			$this->UsersModel->sendMail($user->email, "Someone liked on your post", $message);
+		}
+	}
+
+	public function commentMail($post_id, $user_id, $comment){
+		$user = $this->UsersModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$poster = $this->UsersModel->findFirst(['conditions' => '`user_id` = ?', 'bind' => [$user_id]]);
+		if($user && $user->notify == 1) {
+			$message = "<p><?=$poster->fname?> commented on your post:</p> <br> <p> <?=$comment?> </p>";
+			$this->UsersModel->sendMail($user->email, "Someone commented on your post", $message);
+		}
 	}
 
 }

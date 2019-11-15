@@ -11,6 +11,7 @@ var imgFilter;
 
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
+const stickercan = document.getElementById("sticker");
 //const photos = document.getElementById("photos");
 const photoButton = document.getElementById("photo-button");
 const clearButton = document.getElementById("clear-button");
@@ -57,6 +58,7 @@ photoButton.addEventListener(
 	"click",
 	function(e) {
 		takePicture();
+		//console.log("something");
 		e.preventDefault();
 	},
 	false
@@ -119,9 +121,9 @@ function takePicture() {
 		canvas.style.filter = filter;
 
 		//make canvas visible
-		canvas.style.display = "inline-block";
+		canvas.style.display = "block";
 		canvas.setAttribute("class", "thumbnail");
-		canvas.setAttribute("height", "375");
+		//canvas.setAttribute("height", "375");
 
 		//add image to photos
 		//photos.appendChild(img);
@@ -189,15 +191,27 @@ upload.addEventListener("change", e => {
 			if (image.width <= 500 && image.height <= 500) {
 				canvas.width = image.width;
 				canvas.height = image.height;
-				canvas.style.display = "inline-block";
+				canvas.style.display = "block";
 				context.drawImage(image, 0, 0);
 			} else {
 				canvas.width = 500;
 				canvas.height = 375;
-				canvas.style.display = "inline-block";
+				canvas.style.display = "block";
 				context.drawImage(image, 0, 0);
 			}
 		};
 		image.src = URL.createObjectURL(upload.files[0]);
 	}
 });
+
+function addSticker(sticker) {
+	const ctx = stickercan.getContext("2d");
+
+	stickercan.width = width;
+	stickercan.height = height;
+
+	dImg = new Image();
+	dImg.src = "imgs/stickers/" + sticker;
+	ctx.drawImage(dImg, 0, 0, canvas.width, canvas.height);
+	console.log(dImg.src);
+}

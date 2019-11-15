@@ -87,6 +87,7 @@ class Users extends Model {
 
 	public function registerNewUser($params, $token) {
 		$params["token"] = $token;
+		$params["notify"] = 1;
 		$this->assign($params);
 		
 		$this->deleted = 0;
