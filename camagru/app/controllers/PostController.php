@@ -45,8 +45,10 @@ class PostController extends Controller {
 			}
 
 			if(array_key_exists('likebtn', $_POST)){
+				//echo"here";
 				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
 				$post_id = $_POST['postid'];
+				//echo $user_id." ".$post_id."\n";
 				$this->LikesModel->like($post_id, $user_id);
 				header("Refresh:0");
 			}
