@@ -80,19 +80,21 @@ class PostController extends Controller {
 	}
 
 	public function likeMail($post_id, $user_id) {
-		$user = $this->UsersModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$user = $this->PostsModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$user = $this->UsersModel->findFirst(['conditions' => 'user_id = ?', 'bind' => [$user->user_id]]);
 		$poster = $this->UsersModel->findFirst(['conditions' => '`user_id` = ?', 'bind' => [$user_id]]);
 		if($user && $user->notify == 1) {
-			$message = "<p><?=$poster->fname?> liked on your post</p>";
+			$message = '<p>'.ucwords($poster->fname).' liked on your post</p>';
 			$this->UsersModel->sendMail($user->email, "Someone liked on your post", $message);
 		}
 	}
 
 	public function commentMail($post_id, $user_id, $comment){
-		$user = $this->UsersModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$user = $this->PostsModel->findFirst(['conditions' => 'post_id = ?', 'bind' => [$post_id]]);
+		$user = $this->UsersModel->findFirst(['conditions' => 'user_id = ?', 'bind' => [$user->user_id]]);
 		$poster = $this->UsersModel->findFirst(['conditions' => '`user_id` = ?', 'bind' => [$user_id]]);
 		if($user && $user->notify == 1) {
-			$message = "<p><?=$poster->fname?> commented on your post:</p> <br> <p> <?=$comment?> </p>";
+			$message = '<p>'.ucwords($poster->fname).' commented on your post:</p> <br> <p>"'.$comment.'"</p>';
 			$this->UsersModel->sendMail($user->email, "Someone commented on your post", $message);
 		}
 	}
