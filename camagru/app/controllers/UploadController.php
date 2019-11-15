@@ -19,8 +19,15 @@
 				$data = $_POST['img'];
 				$data = str_replace('data:image/png;base64,', '', $data);
 				$data = str_replace(' ', '+', $data);
-				$data = base64_decode($data);
-				$image = imagecreatefromstring($data);
+				$datatemp = base64_decode($data);
+				$image = imagecreatefromstring($datatemp);
+
+				$data2 = $_POST['sticker'];
+				$data2 = str_replace('data:image/png;base64,', '', $data2);
+				$data2 = str_replace(' ', '+', $data2);
+				$data2temp = base64_decode($data2);
+				$stick = imagecreatefromstring($data2temp);
+				
 
 				$filter = $_POST['filter'];
 				if ($filter == 'invert(100%)'){
@@ -42,9 +49,19 @@
 
 				$user = $this->UsersModel->currentLoggedInUser()->user_id;
 
-				$file_name = time().rand().".jpg";
-				imagejpeg($image, ROOT."/imgs/".$file_name);
+				$file_name = time().rand().".png";
+
+				imagealphablending($image, true);
+            	imagesavealpha($image, true);
+            	imagesavealpha($stick, true);
+            	$w = imagesx($image);
+				$h = imagesy($image);
+				//dnd($w);
+            	imagecopy($image, $stick, 0, 0, 0, 0, $w, $h);
+            	imagePng($image, ROOT."/imgs/".$file_name);
+
 				$this->PostsModel->uploadImage($file_name, $user);
+				//Router::redirect('');
 			}
 			else
 			{
@@ -54,3 +71,4 @@
 		}
 
 	}
+

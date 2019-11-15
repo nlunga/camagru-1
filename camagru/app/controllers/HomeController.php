@@ -21,64 +21,51 @@ class HomeController extends Controller {
 		$_SESSION['posts'] = $result;
 		$_SESSION['users'] = $users;
 
-		$validation = new Validate();
+		// $validation = new Validate();
 
-		if($_POST){
+		// if($_POST){
 			
-			if(array_key_exists('delcomm', $_POST)){
-				$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
-				$comm_id = $_POST['commid'];
-				$this->CommentsModel->delComment($comm_id, $user_id);
-				header("Refresh:0");
-			}
+		// 	if(array_key_exists('delcomm', $_POST)){
+		// 		$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+		// 		$comm_id = $_POST['commid'];
+		// 		$this->CommentsModel->delComment($comm_id, $user_id);
+		// 		header("Refresh:0");
+		// 	}
 
-			else if (array_key_exists('addcomm', $_POST)) {
-				$validation->check($_POST, [
-					'addcomm' => [
-						'display' => "Comment",
-						'required' => true
-					]
-				]);
-				if($validation->passed()) {
-					$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
-					$post_id = $_POST['postid'];
-					$comment = htmlspecialchars($_POST['addcomm']);
-					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
-					header("Refresh:0");
-				}
-			}	
-		}
+		// 	else if (array_key_exists('addcomm', $_POST)) {
+		// 		$validation->check($_POST, [
+		// 			'addcomm' => [
+		// 				'display' => "Comment",
+		// 				'required' => true
+		// 			]
+		// 		]);
+		// 		if($validation->passed()) {
+		// 			$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
+		// 			$post_id = $_POST['postid'];
+		// 			$comment = htmlspecialchars($_POST['addcomm']);
+		// 			$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
+		// 			header("Refresh:0");
+		// 		}
+		// 	}	
+		// }
+
+		
+        $ppp = 9;
+		$postCount = $this->PostsModel->totPosts();
+        if ($postCount >= $ppp)
+            $postsOD = $ppp;
+        else
+            $postsOD = $postCount;        
+        if (isset($_POST['displayed_posts'])){
+            if (($_POST['displayed_posts'] + $ppp) >= $postCount)
+                $postsOD = $postCount;
+            else
+                $postsOD = $_POST['displayed_posts'] + $ppp;
+        }
+        $this->view->postsOD = $postsOD;
+        
 		
 		$this->view->render('home/index');
-		
-
-		// $contacts = $db->findFirst('users', [
-		// 	'conditions' => 'user_id = ?',
-		// 	'bind' => [1],
-		// ]);
-		// dnd($contacts);
-
-		//$sql = "SELECT * FROM users";
-		// $fields = [
-		// 	'fname' => 'Antoinette',
-		// 	'lname' => 'Parham',
-		// 	'email' => 'anti@blah.com'
-		// ];
-		//$result = $db->query($sql);
-		//dnd($result);
-		// $contactsQ = $db->update('users', 7, $fields);
-		//$contactsQ = $db->insert('users', $fields);
-		//dnd($contactsQ);
-
-		//$contactsQ = $db->delete('users', 7);
-
-		// $contactsQ = $db->query("SELECT * FROM users ORDER BY lname, fname");
-		// $contacts = $contactsQ->first();
-		// dnd($contacts->fname);
-
-		// $columns = $db->get_columns('users');
-		// dnd($columns);
-
 		
 	}
 

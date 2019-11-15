@@ -50,23 +50,23 @@
 
 	<div class="center" style="margin: 10px auto;">
 
-		<div class="" style="margin: 10px auto; position: relative;">
-			<canvas id="canvas" style="width: 100%"></canvas>
-			<canvas id="sticker" style="position: absolute; top: 0; left: 0; width: 100%"></canvas>
+		<div class="" style="margin: 10px auto; position: relative; height:375px; width: 500px;">
+			<canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100% ;"></canvas>
+			<canvas id="sticker" style="position: absolute; top: 0; left: 0; width: 100% ;"></canvas>
 		</div>
 
 		<div id="stickers" class='btn-group' style="overflow-x: auto;">
 
 		<?php
-                            if ($handle = opendir('imgs/stickers')) {
-                                while (false !== ($entry = readdir($handle))) {
-                                    if ($entry != "." && $entry != "..") {
-                                        echo "<div style='display: inline-block;' class='btn btn-block' onclick='addSticker(\"$entry\")'><figure class=''><img  height='30px' class='' src='".PROOT."imgs/stickers/".$entry."'></figure></div>";
-                                    }
-                                }
-                                closedir($handle);
-                            }
-                        ?>
+            if ($handle = opendir('imgs/stickers')) {
+                while (false !== ($entry = readdir($handle))) {
+                    if ($entry != "." && $entry != "..") {
+                        echo "<div style='display: inline-block;' class='btn btn-block' onclick='addSticker(\"$entry\")'><figure class=''><img  height='30px' class='' src='".PROOT."imgs/stickers/".$entry."'></figure></div>";
+                    }
+                }
+                closedir($handle);
+            }
+        ?>
 
 		</div>
 

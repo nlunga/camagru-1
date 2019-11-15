@@ -30,4 +30,8 @@ class Posts extends Model {
 		$this->query("DELETE FROM posts WHERE post_id = {$post_id} AND `user_id` = {$user_id}");
 	}
 
+	public function totPosts() {
+		return count($this->find(['order' => 'creation_date DESC']));
+	}
+
 }
