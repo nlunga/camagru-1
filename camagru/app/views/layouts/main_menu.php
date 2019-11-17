@@ -8,17 +8,18 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_menu" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="<?=PROOT?>home"><?=MENU_BRAND?></a>
-    </div>
+      </div>
+
   
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="main_menu">
+    <div id="navbar" class="collapse navbar-collapse" >
       <ul class="nav navbar-nav">
 		 <?php foreach($menu as $key => $val): 
 			$active = ''; ?>
@@ -45,8 +46,7 @@
 				<li><a class="<?=$active?>" href="<?=$val?>" ><?=$key?></a></li>
 		<?php endif; ?>
 		<?php endforeach; ?>
-        <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li> -->
+         
        
       </ul>
       <!-- <form class="navbar-form navbar-left">
@@ -55,18 +55,20 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form> -->
-      <ul class="nav navbar-nav navbar-right">
-        
-		<?php if(currentUser()) :?>
-      <li><a href="<?=PROOT?>profile"><?=ucwords(currentUser()->fname)?> </a></li>
-      <li><a href="<?=PROOT?>profile/settings">Settings</a></li>
-      <li><a href="<?=PROOT?>register/logout">Logout</a></li>
-    <?php else: ?>
-      <li><a href="<?=PROOT?>register/login">Login</a></li>
-      <li><a href="<?=PROOT?>register/register">Register</a></li>
-		<?php endif; ?>
 
+      <ul class="nav navbar-nav navbar-right">
+        <?php if(currentUser()) :?>
+          <li><a href="<?=PROOT?>profile"><?=ucwords(currentUser()->fname)?> </a></li>
+          <li><a href="<?=PROOT?>profile/settings">Settings</a></li>
+          <li><a href="<?=PROOT?>register/logout">Logout</a></li>
+        <?php else: ?>
+          <li><a href="<?=PROOT?>register/login">Login</a></li>
+          <li><a href="<?=PROOT?>register/register">Register</a></li>
+        <?php endif; ?>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+
+  <script src="<?=PROOT?>/js/navbar.js"></script>
 </nav>
