@@ -10,6 +10,11 @@
 		}
 
 		public function indexAction() {
+			$user_id = currentUser()->user_id;
+			$user_posts = $this->PostsModel->getUserPosts($user_id);
+			$this->view->u_posts = $user_posts;
+			//$_SESSION['u_posts'] = $user_posts;
+
 			$this->view->render('upload/index');
 		}
 
