@@ -2,7 +2,6 @@
 <?php $this->setSiteTitle(MENU_BRAND.' | User') ?>
 <?php $this->start('body'); ?>
 
-<?php //$user = $_SESSION['browse']?>
 <?php $u_posts = $this->data['posts'];?>
 <?php $user = $this->data['user'];?>
 
@@ -11,13 +10,11 @@
   	<small>Profile</small></h1>
 </div>
 
-<?php //$u_posts = $_SESSION['u_posts']?>
-
 	<div class="container row">
 		<?php if(empty($u_posts)) :?>
 		<div class="container text-center">
-				<h1><small>No posts ಠ_ಠ</small></h1>
-				<img src="https://media.giphy.com/media/f4DGnGf6xwFonJUI0D/giphy.gif" alt="" class="img-responsive" allowFullScreen>
+				<h2><small>No posts ಠ_ಠ</small></h2>
+				<img src="<?=PROOT?>/imgs/gif/nothing-burger.gif" alt="" class="img-responsive" allowFullScreen>
 			</div>
 		<?php endif; ?>
 		<?php foreach ($u_posts as $post): ?>
