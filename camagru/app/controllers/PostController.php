@@ -58,7 +58,8 @@ class PostController extends Controller {
 			}
 
 			else if (array_key_exists('addcomm', $_POST)) {
-				$validation->check($_POST, [
+				$posted_values = posted_values($_POST);
+				$validation->check($posted_values, [
 					'addcomm' => [
 						'display' => "Comment",
 						'required' => true
@@ -67,8 +68,8 @@ class PostController extends Controller {
 				if($validation->passed()) {
 					echo "here";
 					$user_id = $this->UsersModel->currentLoggedInUser()->user_id;
-					$post_id = $_POST['postid'];
-					$comment = htmlspecialchars($_POST['addcomm']);
+					$post_id = $posted_values['postid'];
+					$comment = htmlspecialchars($posted_values['addcomm']);
 					$this->CommentsModel->uploadComment($post_id, $user_id, $comment);
 					$this->commentMail($post_id, $user_id, $comment);
 					header("Refresh:0");

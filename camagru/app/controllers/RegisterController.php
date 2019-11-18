@@ -57,10 +57,11 @@ class RegisterController extends Controller {
 
 		if($_POST) {
 			$posted_values = posted_values($_POST);
-			$validation->check($_POST, [
+			$validation->check($posted_values, [
 				'fname' => [
 					'display' => 'First Name',
-					'required' => true
+					'required' => true,
+
 				],
 				'lname' => [
 					'display' => 'Last Name',
@@ -84,7 +85,7 @@ class RegisterController extends Controller {
 					'display' => 'Password',
 					'required' => true,
 					'min' => 6,
-					'lcase' => false
+					'lcase' => true
 				],
 				'confirm' => [
 					'display' => 'Confirm Password',
@@ -96,9 +97,9 @@ class RegisterController extends Controller {
 			if($validation->passed()) {
 				$newUser = new Users();
 				$token = bin2hex(random_bytes(20));
-				$newUser->registerNewUser($_POST, $token);
+				$newUser->registerNewUser($posted_values, $token);
 				$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
-				$this->UsersModel->sendMail($_POST['email'],"Camagru Validation Request", $message);
+				$this->UsersModel->sendMail($posted_values['email'],"Camagru Validation Request", $message);
 				Router::redirect('register/login');
 			}
 		}
@@ -139,7 +140,7 @@ class RegisterController extends Controller {
 
 		if($_POST) {
 			$posted_values = posted_values($_POST);
-			$validation->check($_POST, [
+			$validation->check($posted_values, [
 			'email' => [
 				'display' => 'Email',
 				'required' => true,
@@ -156,7 +157,7 @@ class RegisterController extends Controller {
 					$token = bin2hex(random_bytes(20));
 					$this->UsersModel->update($result->user_id, ['token' => $token]);
 					$message = "<a href='http://localhost:8080/camagru/camagru/register/resetpass?token=$token'>Click here to reset your pasword.</a>";
-					$this->UsersModel->sendMail($_POST['email'], "Camagru Password Reset Request", $message);
+					$this->UsersModel->sendMail($posted_values['email'], "Camagru Password Reset Request", $message);
 					Router::redirect('register/login');
 				}
 				else {
@@ -181,7 +182,7 @@ class RegisterController extends Controller {
 		
 		if($_POST) {
 			$posted_values = posted_values($_POST);
-			$validation->check($_POST, [
+			$validation->check($posted_values, [
 				'password' => [
 					'display' => 'Password',
 					'required' => true,
@@ -201,7 +202,7 @@ class RegisterController extends Controller {
 			$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
 			if ($result->email) {
 				if ($result->token == $token && $result->verified == 1) {
-					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$password = password_hash($posted_values['password'], PASSWORD_DEFAULT);
 					$this->UsersModel->update($result->user_id, ['password' => $password]);
 					$this->UsersModel->update($result->user_id, ['token' => '']);
 					Router::redirect('register/login');

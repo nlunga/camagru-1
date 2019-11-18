@@ -47,7 +47,7 @@
               <input type="submit" id="delcomm" name="delcomm" class="btn btn-primary btn-xs pull-right" value="Delete">
             </form>
             <?php endif;?>
-          <p class="comments"><?=htmlspecialchars($comm->comment)?></p>
+          <p class="comments"><?=$comm->comment?></p>
         </div>
       <?php endif;?>
     <?php endforeach;?>

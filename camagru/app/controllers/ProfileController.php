@@ -56,7 +56,7 @@ class ProfileController extends Controller {
 					'display' => 'New Password',
 					'required' => true,
 					'min' => 6,
-					'lcase' => false
+					'lcase' => true
 				],
 				'confirm' => [
 					'display' => 'Confirm Password',
@@ -91,7 +91,7 @@ class ProfileController extends Controller {
 
 		if($_POST) {
 			$posted_values = posted_values($_POST);
-			$validation->check($_POST, [
+			$validation->check($posted_values, [
 				'email' => [
 					'display' => 'Email',
 					'required' => true,
@@ -103,7 +103,7 @@ class ProfileController extends Controller {
 
 			if($validation->passed()) {
 				$user = currentUser();
-				$this->UsersModel->update($user->user_id, ['email' => $_POST['email']]);
+				$this->UsersModel->update($user->user_id, ['email' => $posted_values['email']]);
 				Router::redirect('profile/settings');
 			}
 
@@ -120,7 +120,7 @@ class ProfileController extends Controller {
 
 		if($_POST) {
 			$posted_values = posted_values($_POST);
-			$validation->check($_POST, [
+			$validation->check($posted_values, [
 				'username' => [
 					'display' => 'Username',
 					'required' => true,
@@ -132,7 +132,7 @@ class ProfileController extends Controller {
 
 			if($validation->passed()) {
 				$user = currentUser();
-				$this->UsersModel->update($user->user_id, ['username' => $_POST['username']]);
+				$this->UsersModel->update($user->user_id, ['username' => $posted_values['username']]);
 				Router::redirect('profile/settings');
 			}
 

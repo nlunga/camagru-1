@@ -185,7 +185,7 @@ document.getElementById("photo-save").addEventListener("click", function() {
 	ajax.open("POST", "/camagru/camagru/upload/submit", true);
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	ajax.onload = function() {
-		if (ajax.status === 200) console.log(ajax.responseText);
+		if (ajax.status === 200) location.replace("/camagru/camagru/");
 		else if (ajax.status === 400) console.log("oh shit");
 	};
 	ajax.send("img=" + imgUrl + "&filter=" + imgFilter + "&sticker=" + stickUrl);

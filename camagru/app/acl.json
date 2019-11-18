@@ -4,7 +4,14 @@
 			"Profile": ["*"]
 		},
 		"Home": ["*"],
-		"Register": ["login", "register", "verify", "forgot", "changepass"],
+		"Register": [
+			"login",
+			"register",
+			"verify",
+			"forgot",
+			"changepass",
+			"resetpass"
+		],
 		"Restricted": ["*"],
 		"Post": ["*"],
 		"Profile": ["user"]

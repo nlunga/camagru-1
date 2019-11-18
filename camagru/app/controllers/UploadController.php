@@ -66,7 +66,10 @@
             	imagePng($image, ROOT."/imgs/".$file_name);
 
 				$this->PostsModel->uploadImage($file_name, $user);
-				//Router::redirect('');
+				
+				// echo 'done';
+				// die();
+				// Router::redirect('');
 			}
 			else
 			{

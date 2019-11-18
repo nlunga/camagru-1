@@ -70,10 +70,16 @@ class Validate {
 						break;
 
 						case 'lcase':
-						if(ctype_alpha($value)){
-							if (strtolower($value) == $value){
-								$this->addError(["{$display} all lowercase is forbidden", $item]);
-							}
+						// if(ctype_alpha($value)){
+						// 	if (strtolower($value) == $value){
+						if(!preg_match("/^(?=.*?[0-9])(?=.*[A-Z]).{6,}$/", $value)) {
+							$this->addError(["{$display} must have atleast 1 uppercase character, 1 lower case, and 1 digit.", $item]);
+						}
+						break;
+
+						case 'chars':
+						if(!preg_match("/^\S+\w{8,32}\S{1,}/", $value)) {
+							$this->addError(["{$display} must not contain special characters or spaces", $item]);
 						}
 						break;
 

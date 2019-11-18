@@ -1,7 +1,5 @@
 <?php $this->setSiteTitle(MENU_BRAND.' | Reset Password'); ?>
 
-<?php $this->end(); ?>
-
 <?php $this->start('body'); ?>
 
 <div class="page-header text-center">
