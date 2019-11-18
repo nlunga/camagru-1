@@ -33,7 +33,7 @@
 			<option value="grayscale(100%)">Grayscale</option>
 			<option value="sepia(100%)">Sepia</option>
 			<option value="invert(100%)">Invert</option>
-			<option value="hue-rotate(90deg)">Hue</option>
+			<!-- <option value="hue-rotate(90deg)">Hue</option> -->
 			<option value="blur(10px)">Blur</option>
 			<option value="contrast(200%)">Contrast</option>
 		</select>
@@ -55,13 +55,13 @@
 			<canvas id="sticker" style="position: absolute; top: 0; left: 0; width: 100% ;"></canvas>
 		</div>
 
-		<div id="stickers" class='btn-group' style="overflow-x: auto;">
+		<div id="stickers" class='btn-group' style="overflow-x: auto; margin: 20px auto;">
 
 		<?php
             if ($handle = opendir('imgs/stickers')) {
                 while (false !== ($entry = readdir($handle))) {
                     if ($entry != "." && $entry != "..") {
-                        echo "<div style='display: inline-block;' class='btn btn-block' onclick='addSticker(\"$entry\")'><figure class=''><img  height='30px' class='' src='".PROOT."imgs/stickers/".$entry."'></figure></div>";
+                        echo "<div style='display: inline-block;' class='btn btn-default' onclick='addSticker(\"$entry\")'><figure class=''><img  height='35px' class='' src='".PROOT."imgs/stickers/".$entry."'></figure></div>";
                     }
                 }
                 closedir($handle);
@@ -82,6 +82,33 @@
 		<!-- <div id="photos" style="margin: 10px 0;">
 		</div> -->
 	</div>
+
+<?php $u_posts = $this->u_posts; ?>
+
+	<div class='text-center'>
+	
+	<h1>
+  	<small>Previous posts</small> <hr></h1>
+
+	 <?php if(empty($u_posts)) :?>
+        <h3><small>No posts ಠ_ಠ</small></h3>
+    <?php endif; ?>
+
+
+	<?php foreach ($u_posts as $post): ?>
+
+			<div class="col-xs-6 col-md-4">
+				<a href="<?=PROOT."post?p=".$post->post_id?>" class="thumbnail"> 
+					<img src="<?=PROOT."/imgs/". ($post->img)?>" alt="">
+				</a>
+
+			</div>
+		
+	<?php endforeach ?>
+		
+	
+</div>	
+
 </div>
 
 <script src="<?=PROOT?>/js/upload.js"></script>

@@ -8,7 +8,7 @@
 </div>
 
 <div class="container text-center">
-	<img src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" width="332" height="480" frameBorder="0" class="img-responsive" allowFullScreen>
+	<img src="<?=PROOT?>/imgs/gif/404.gif" width="332" height="480" frameBorder="0" class="img-responsive" allowFullScreen>
 </div>
 
 

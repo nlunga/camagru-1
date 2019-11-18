@@ -10,6 +10,14 @@
 <?php $u_posts = $_SESSION['u_posts']?>
 
 	<div class="container row">
+
+	<?php if(empty($u_posts)) :?>
+          <div class="container text-center">
+              <h2><small>No posts ಠ_ಠ</small></h2>
+              <img src="<?=PROOT?>/imgs/gif/nothing-burger.gif" alt="" class="img-responsive" allowFullScreen>
+            </div>
+        <?php endif; ?>
+
 		<?php foreach ($u_posts as $post): ?>
 			<div class="col-xs-6 col-md-4">
 				<a href="<?=PROOT."post?p=".$post->post_id?>" class="thumbnail"> 

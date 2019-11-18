@@ -109,17 +109,27 @@ class RegisterController extends Controller {
 	}
 
 	public function verifyAction(){
-		$token = $_GET['token'];
-		$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
-		if($result->email){
-			if ($result->token){
-				$this->UsersModel->update($result->user_id, ['verified' => 1]);
-				$this->UsersModel->update($result->user_id, ['token' => '']);
-				$this->view->render('register/verify');
+		if ($_GET){
+			if($_GET['token']){
+				$token = $_GET['token'];
+				$result = $this->UsersModel->findFirst(['conditions' => "token = ?", 'bind' => [$token]]);
+			}
+			else
+				$this->view->render('restricted/index');
+
+			if($result->email){
+				if ($result->token){
+					$this->UsersModel->update($result->user_id, ['verified' => 1]);
+					$this->UsersModel->update($result->user_id, ['token' => '']);
+					$this->view->render('register/verify');
+				}
+			}
+			else{
+				$this->view->render('restricted/index');
 			}
 		}
 		else{
-			$this->view->render('restricted');
+			$this->view->render('restricted/index');
 		}
 	}
 

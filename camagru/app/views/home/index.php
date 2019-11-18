@@ -20,8 +20,17 @@
 
 <div class="container row">
 <?php
-				$x = 0;
-				if (!empty($result))
+        $x = 0;
+        
+        if(empty($result)) :?>
+          <div class="container text-center">
+              <h2><small>No posts ಠ_ಠ</small></h2>
+              <img src="<?=PROOT?>/imgs/gif/nothing-burger.gif" alt="" class="img-responsive" allowFullScreen>
+            </div>
+        <?php endif; ?>
+
+
+				<?php if (!empty($result))
 					for ($i = 0; $i < $this->postsOD; $i++): ?>
             <div class="col-xs-6 col-md-4">
       
