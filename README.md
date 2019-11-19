@@ -95,4 +95,4 @@ register, browse, snap, enjoy!
 
 ## Shout-out
 
-Thanks to [@FWMoor](https://github.com/FWMoor) for help with inifinate pagination, stickers, and always being available to answer my questions.
+Thanks to superhuman [@FWMoor](https://github.com/FWMoor) for help with inifinate pagination, stickers, and always being available to answer my questions.
