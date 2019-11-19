@@ -66,7 +66,8 @@ The project should contain imperatively:
 ## Installation
 
 A server is required to host the web app. Xampp or mamp can be used.
-A xampp installation guide: https://www.youtube.com/watch?v=xdvVKywGlc0&t=607s
+A xampp installation guide: https://www.youtube.com/watch?v=xdvVKywGlc0&t=607s.  
+
 During the installation process the following credentials should be set:
 
 ```
