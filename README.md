@@ -65,4 +65,34 @@ The project should contain imperatively:
 
 ## Installation
 
-to be continued...
+A server is required to host the web app. Xampp or mamp can be used.
+A xampp installation guide: https://www.youtube.com/watch?v=xdvVKywGlc0&t=607s
+During the installation process the following credentials should be set:
+
+```
+username: root
+password: root42
+```
+
+If other credentials are used, these fields will need to be edited in the `config/database.php` file.  
+Once a localhost server is installed, navigate to the `htdocs` directory.
+Clone (or download & unzip) the camagru repo into `htdocs`
+
+```
+cd xampp/htdocs/
+git clone https://github.com/veronar/camagru.git
+```
+
+Open the xampp control panel; start both the Apache & MySql servers.
+Open a web browser (Chrome or Brave or Firefox or Safari, etc).
+In the address bar type in `localhost` and press enter. This will open up the server landing page. This confirms that the server is installed and active. Click on the link to phpmyadmin and ensure credentials are correct.
+
+Navigate to `localhost:8080/camagru/camagru/config/setup.php` in the web browser.
+If successful the databse will be setup and the page will echo `done`. If not, the incorrect database details have been used and this will need to be changed in `config/database.php`.
+
+The web app is not ready to use. Ensure your `php.ini` is setup to send mail.
+register, browse, snap, enjoy!
+
+## Shout-out
+
+Thanks to [@FWMoor](https://github.com/FWMoor) for majopr help with inifinate pagination, stickers, and always being available to answer my questions.
