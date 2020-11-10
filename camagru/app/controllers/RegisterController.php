@@ -98,7 +98,7 @@ class RegisterController extends Controller {
 				$newUser = new Users();
 				$token = bin2hex(random_bytes(20));
 				$newUser->registerNewUser($posted_values, $token);
-				$message = "<a href='http://localhost:8080/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
+				$message = "<a href='http://localhost:80/camagru/camagru/register/verify?token=$token'>Click here to verify your account.</a>";
 				$this->UsersModel->sendMail($posted_values['email'],"Camagru Validation Request", $message);
 				Router::redirect('register/login');
 			}
@@ -156,7 +156,7 @@ class RegisterController extends Controller {
 				if ($result->token == '' && $result->verified == 1) {
 					$token = bin2hex(random_bytes(20));
 					$this->UsersModel->update($result->user_id, ['token' => $token]);
-					$message = "<a href='http://localhost:8080/camagru/camagru/register/resetpass?token=$token'>Click here to reset your pasword.</a>";
+					$message = "<a href='http://localhost:80/camagru/camagru/register/resetpass?token=$token'>Click here to reset your pasword.</a>";
 					$this->UsersModel->sendMail($posted_values['email'], "Camagru Password Reset Request", $message);
 					Router::redirect('register/login');
 				}
@@ -172,14 +172,14 @@ class RegisterController extends Controller {
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/forgot');
-		
+
 	}
 
 	public function resetpassAction() {
 
 		$validation = new Validate();
 		$posted_values = ['password' => '', 'confirm' => ''];
-		
+
 		if($_POST) {
 			$posted_values = posted_values($_POST);
 			$validation->check($posted_values, [
@@ -218,7 +218,7 @@ class RegisterController extends Controller {
 		$this->view->post = $posted_values;
 		$this->view->displayErrors = $validation->displayErrors();
 		$this->view->render('register/resetpass');
-		
+
 	}
 
 }
