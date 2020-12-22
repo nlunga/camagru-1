@@ -50,6 +50,7 @@
         $statement = "CREATE TABLE user_sessions(
             sess_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_id` INT NOT NULL,
+            FOREIGN KEY(`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
             email VARCHAR(255),
             `session` VARCHAR(255)NOT NULL,
             user_agent VARCHAR(255) NOT NULL
@@ -59,6 +60,7 @@
         $statement = "CREATE TABLE posts(
             post_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_id` INT NOT NULL,
+            FOREIGN KEY(`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
             img LONGTEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
@@ -67,8 +69,9 @@
         $statement = "CREATE TABLE comments(
             comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `user_id` INT NOT NULL,
+            FOREIGN KEY(`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
             post_id INT NOT NULL,
-            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
+            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
             comment TEXT NOT NULL,
             creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );";
@@ -77,14 +80,15 @@
         $statement = "CREATE TABLE likes(
             like_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             post_id INT NOT NULL,
-            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE, 
-            `user_id` INT NOT NULL
+            FOREIGN KEY(post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+            `user_id` INT NOT NULL,
+            FOREIGN KEY(`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE
             );";
         $conn->exec($statement);
     }
     catch(PDOException $e){
         echo $statement."<br>".$e->getMessage();
-    } 
+    }
     $conn = NULL;
 
     // echo '<script type="text/javascript">';
